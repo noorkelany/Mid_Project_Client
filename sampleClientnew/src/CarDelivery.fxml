@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="CarDelivery"
+            stylesheets="@carDelivery_style.css"
+            styleClass="root"
+            prefHeight="520.0" prefWidth="600.0">
+
+    <!-- Top bar with back button and centered title -->
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="top-bar">
+            <children>
+                <Button fx:id="btnBack" text="← Back" onAction="#handleBackToMainPage"
+                        styleClass="back-button"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Car Delivery" styleClass="top-bar-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Form center layout -->
+    <center>
+        <VBox spacing="15" alignment="TOP_LEFT" style="-fx-padding: 40 40 40 60;">
+            <children>
+                <Label fx:id="successLabel" text="Car delivered successfully"
+                       textFill="#669644" visible="false" styleClass="result-label"/>
+
+                <Label text="Car number: *" styleClass="label"/>
+                <TextField fx:id="carNumberField" promptText="Car number xxxxxxxr" styleClass="text-field"/>
+
+                <Label text="Model: *" styleClass="label"/>
+                <TextField fx:id="modelField" promptText="Model" styleClass="text-field"/>
+
+                <Label text="Year: *" styleClass="label"/>
+                <TextField fx:id="yearField" promptText="Year" styleClass="text-field"/>
+
+                <Label text="Extend time (in hour):" styleClass="label"/>
+                <Spinner fx:id="hourSpinner"/>
+
+                <Label fx:id="emptyLabels" text="*You have empty fields"
+                       visible="false" styleClass="result-label"/>
+
+                <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 0 0 0 0;">
+                    <children>
+             
+                        <Button text="Delivery" prefWidth="260.0" onAction="#DeliveryButton" styleClass="button"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

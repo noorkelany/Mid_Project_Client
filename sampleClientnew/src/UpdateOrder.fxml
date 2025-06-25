@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+	fx:controller="UpdateOrderController" prefWidth="500" prefHeight="320"
+	stylesheets="@updateorder.css">
+	<children>
+		<VBox spacing="15" AnchorPane.topAnchor="20"
+			AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+			<HBox alignment="CENTER">
+				<Label text="Orders Page" styleClass="page-title" />
+			</HBox>
+
+	<GridPane hgap="10" vgap="15">
+				<columnConstraints>
+					<ColumnConstraints halignment="RIGHT" />
+					<ColumnConstraints hgrow="ALWAYS" />
+				</columnConstraints>
+
+				<Label text="Order number:" GridPane.rowIndex="0"
+					GridPane.columnIndex="0" styleClass="form-label" />
+				<TextField fx:id="orderNumberField" GridPane.rowIndex="0"
+					GridPane.columnIndex="1" styleClass="green-field" editable="false"/>
+
+				<Label text="Parking Space:" GridPane.rowIndex="1"
+					GridPane.columnIndex="0" styleClass="form-label" />
+				<TextField fx:id="parkingSpaceField" GridPane.rowIndex="1"
+					GridPane.columnIndex="1" styleClass="green-field" />
+
+				<Label text="Order date:" GridPane.rowIndex="2"
+					GridPane.columnIndex="0" styleClass="form-label" />
+				<DatePicker fx:id="datePicker" GridPane.rowIndex="2"
+					GridPane.columnIndex="1" styleClass="green-field" />
+			</GridPane>
+
+			<HBox spacing="10" alignment="CENTER">
+				<Button text="Update" onAction="#handleUpdate"
+					styleClass="update-button" />
+				<Button text="Back" onAction="#goBack"
+					styleClass="back-button" />
+			</HBox>
+
+			<Label fx:id="statusLabel" />
+		</VBox>
+	</children>
+</AnchorPane>

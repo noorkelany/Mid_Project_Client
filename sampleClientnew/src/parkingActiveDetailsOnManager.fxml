@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="550.0" prefWidth="900.0"
+            stylesheets="@updateorder.css"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="parkingActiveDetailsOnManagerController">
+
+   <children>
+      <!-- Top blue bar -->
+      <HBox prefHeight="45.0" prefWidth="900.0" style="-fx-background-color: #1e88e5;">
+         <children>
+            <Button text="← Back" onAction="#handleBack"
+                    styleClass="back-button" />
+         </children>
+         <padding><Insets top="8" left="10" /></padding>
+      </HBox>
+
+      <!-- Left side menu -->
+      <VBox layoutY="45.0" prefHeight="505.0" prefWidth="180.0" style="-fx-background-color: #bbdefb;">
+         <children>
+            <VBox prefHeight="60.0" />
+            <Button text="Subscriber details" onAction="#subscriberDetailsBtn"
+                    maxWidth="160.0" styleClass="side-menu-button" />
+            <Button text="Parking active details"
+                    maxWidth="160.0" styleClass="side-menu-button" />
+            <Button text="Reports" onAction="#reportsBtn"
+                    maxWidth="160.0" styleClass="side-menu-button" />
+         </children>
+         <padding><Insets top="20" left="10" right="10" bottom="10" /></padding>
+      </VBox>
+
+      <!-- Main content -->
+      <VBox layoutX="180.0" layoutY="55.0" spacing="20.0" prefWidth="700.0">
+         <children>
+            <Label text="Parking Active Details" styleClass="main-title" />
+
+            <TableView fx:id="parkingTable" prefHeight="400.0">
+               <columns>
+                  <TableColumn fx:id="subscriberCodeCol" text="Subscriber Code" prefWidth="120.0" />
+                  <TableColumn fx:id="confCodeCol" text="Confirmation Code" prefWidth="140.0" />
+                  <TableColumn fx:id="carNumberCol" text="Car Number" prefWidth="120.0" />
+                  <TableColumn fx:id="parkingSpaceCol" text="Parking Space" prefWidth="120.0" />
+                  <TableColumn fx:id="delTimeCol" text="Delivery Time" prefWidth="120.0" />
+                  <TableColumn fx:id="recTimeCol" text="Receiving Time" prefWidth="120.0" />
+               </columns>
+            </TableView>
+         </children>
+         <padding><Insets top="20" left="30" right="30" bottom="20" /></padding>
+      </VBox>
+   </children>
+</AnchorPane>

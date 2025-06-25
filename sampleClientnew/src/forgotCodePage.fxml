@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/8.0.171"
+            fx:controller="ReceivingCarController"
+            stylesheets="@receivingcode.css"
+            prefWidth="600" prefHeight="400"
+            style="-fx-background-color: linear-gradient(to bottom, #eaf4ff, #f4f7fa);">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="top-bar" BorderPane.alignment="TOP_CENTER">
+            <children>
+                <Button text="← Back" onAction="#handleBackToMainPage" styleClass="back-button"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Choose how to get your code" styleClass="main-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+            </children>
+            <padding><Insets top="12" right="20" bottom="12" left="20"/></padding>
+        </HBox>
+    </top>
+
+    <!-- Center Content -->
+    <center>
+        <VBox spacing="18" alignment="CENTER">
+            <padding><Insets top="15" right="30" bottom="20" left="30"/></padding>
+
+            <HBox spacing="20" alignment="CENTER">
+                <Button fx:id="btnEmail" text="By Email" onAction="#SendByEmail" styleClass="side-menu-button"/>
+                <Button fx:id="btnSMS" text="By SMS" onAction="#SendBySMS" styleClass="side-menu-button"/>
+            </HBox>
+
+            
+
+        </VBox>
+    </center>
+</BorderPane>

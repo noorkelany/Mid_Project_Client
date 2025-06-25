@@ -1,0 +1,55 @@
+/* ===================== */
+/*       Top Bar         */
+/* ===================== */
+
+.top-bar {
+    -fx-background-color: #1e3a74;
+    -fx-padding: 12 20;
+}
+
+.main-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* ===================== */
+/*     Back Button       */
+/* ===================== */
+.back-button {
+    -fx-background-color: #1976d2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 6 14;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+.back-button:hover {
+    -fx-background-color: #0d47a1;
+}
+
+
+/* ===================== */
+/*     Action Buttons    */
+/* ===================== */
+.side-menu-button {
+    -fx-pref-width: 160px;
+    -fx-pref-height: 60px;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-color: #d0eaff;
+    -fx-background-radius: 20; /* פינות מעוגלות */
+    -fx-border-radius: 20;
+    -fx-border-color: #a0c0e0;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 2);
+    -fx-cursor: hand;
+}
+
+.side-menu-button:hover {
+    -fx-background-color: #a8d0f0;
+    -fx-text-fill: #003366;
+    -fx-cursor: hand;
+}
+
+

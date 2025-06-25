@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:controller="parkingActiveDetailsController"
+            xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx/8.0.171"
+            prefWidth="850" prefHeight="600"
+            stylesheets="@updateorder.css">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox spacing="20" alignment="CENTER_LEFT" styleClass="top-bar">
+            <children>
+                <Button fx:id="backButton" text="← Back"
+                        onAction="#handleBack" styleClass="back-button"/>
+                <Label text="Parking Active Details" styleClass="main-title"/>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Side Navigation Bar -->
+    <left>
+        <VBox spacing="10" alignment="TOP_CENTER" prefWidth="180" styleClass="side-panel">
+            <children>
+                <Button text="Subscriber details"
+                        onAction="#subscriberDetailsBtn"
+                        styleClass="side-menu-button"/>
+                <Button text="Parking active details"
+                        styleClass="side-menu-button-selected"/>
+            </children>
+            <padding>
+                <Insets top="40"/>
+            </padding>
+        </VBox>
+    </left>
+
+    <!-- Main Content -->
+    <center>
+        <VBox spacing="20" alignment="TOP_CENTER" style="-fx-padding: 30;">
+            <TableView fx:id="parkingTable" prefHeight="400" prefWidth="600">
+                <columns>
+                    <TableColumn fx:id="subscriberCodeCol" prefWidth="100" text="Subscriber Code"/>
+                    <TableColumn fx:id="confCodeCol" prefWidth="120" text="Conformation code"/>
+                    <TableColumn fx:id="carNumberCol" prefWidth="100" text="Car number"/>
+                    <TableColumn fx:id="parkingSpaceCol" prefWidth="100" text="Parking space"/>
+                    <TableColumn fx:id="delTimeCol" prefWidth="120" text="Delivery time"/>
+                    <TableColumn fx:id="recTimeCol" prefWidth="120" text="Receiving time"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

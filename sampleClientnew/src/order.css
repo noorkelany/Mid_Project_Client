@@ -1,0 +1,68 @@
+
+.main-pane {
+    -fx-background-color: #e0f0ff; 
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+
+.top-bar {
+    -fx-background-color: #1e3a74;
+    -fx-padding: 12px;
+}
+
+
+.top-bar-title {
+    -fx-font-size: 26px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+
+.back-button {
+    -fx-background-color: #1e88e5;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 6 14;
+    -fx-cursor: hand;
+}
+.back-button:hover {
+    -fx-background-color: #1565c0;
+}
+
+/* כפתורים ראשיים */
+.primary-button {
+    -fx-background-color: #1e88e5;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+}
+.primary-button:hover {
+    -fx-background-color: #1565c0;
+}
+
+/* תיבות טופס: DatePicker + ComboBox */
+.form-control {
+    -fx-font-size: 14px;
+    -fx-pref-width: 250px;
+    -fx-padding: 8px;
+    -fx-border-color: #2196f3;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-background-color: white;
+}
+
+/* תווית טופס */
+.form-grid .label {
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+
+/* תוויות מצב */
+#statusLabel {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}

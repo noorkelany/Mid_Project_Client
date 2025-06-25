@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- Main layout for the Parking Spot Report screen -->
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+	fx:controller="ParkingSpotReportController"
+	stylesheets="@parkingReportStyle.css" prefHeight="700.0"
+	prefWidth="1100.0">
+
+	<!-- Header toolbar with title -->
+	<top>
+		<ToolBar>
+			<Button fx:id="backButton" text="Back" onAction="#handleBack" />
+			<!-- Spacer pushes title to the center -->
+			<Region HBox.hgrow="ALWAYS" />
+
+			<Label text="Monthly Parking Spot Report"
+				style="-fx-text-fill: white !important;
+    -fx-font-size: 30px  !important;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 4, 0.4, 1, 1)" />
+    <Region HBox.hgrow="ALWAYS"/>
+			<Region fx:id="spacer" HBox.hgrow="ALWAYS" />
+		</ToolBar>
+	</top>
+
+	<!-- Main content: charts -->
+	<center>
+		<VBox spacing="20" alignment="TOP_CENTER">
+			<!-- Stacked Bar Chart: Shows Regular vs Extended Parking Durations -->
+			<BarChart fx:id="durationChart"
+				title="Parking Duration (Regular vs Extended)" legendVisible="true"
+				animated="true">
+				<xAxis>
+					<CategoryAxis label="Parking Spot Code" />
+				</xAxis>
+				<yAxis>
+					<NumberAxis label="Duration (hours)" />
+				</yAxis>
+			</BarChart>
+
+			<!-- Bar Chart: Shows Number of Late Returns per Spot -->
+			<BarChart fx:id="lateReturnChart"
+				title="Number of Late Returns per Spot" legendVisible="false"
+				animated="true">
+				<xAxis>
+					<CategoryAxis label="Parking Spot Code" />
+				</xAxis>
+				<yAxis>
+					<NumberAxis label="Number of Late Returns" />
+				</yAxis>
+			</BarChart>
+
+			<Button fx:id="exportButton" text="Export to PDF"
+				onAction="#handleExportPDF" />
+		</VBox>
+	</center>
+</BorderPane>

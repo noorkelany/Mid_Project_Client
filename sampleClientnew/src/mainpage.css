@@ -1,0 +1,72 @@
+
+.top-bar {
+    -fx-background-color: linear-gradient(to right, #1e3c72, #2a5298);
+    -fx-padding: 10 20;
+    -fx-alignment: center-left;
+}
+
+
+.top-title-centered {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-translate-x: 20px;
+}
+
+
+.nav-pane {
+    -fx-background-color: #f4f7fa;
+    -fx-padding: 20;
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color: #ccc;
+    -fx-spacing: 10;
+}
+
+
+.group-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: #444;
+    -fx-padding: 5 0 3 0;
+}
+
+.nav-button {
+    -fx-background-color: #d0e6f7;
+    -fx-text-fill: #003366;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI";
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 10 14;
+    -fx-border-color: #b0c4de;
+    -fx-border-radius: 6;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.3, 0, 2);
+}
+
+.nav-button:hover {
+    -fx-background-color: #a8d0f0;
+    -fx-cursor: hand;
+}
+
+.info-box {
+    -fx-font-family: "Courier New";
+    -fx-font-size: 14px;
+    -fx-text-fill: #003366;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 8;
+    -fx-padding: 10;
+}
+
+.main-content {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.image-view {
+    -fx-smooth: true;
+}
+
+

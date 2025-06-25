@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="550.0" prefWidth="900.0" stylesheets="@updateorder.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingActiveDetailsOnManagerController">
+
+	<children>
+
+		<!-- Top Blue Bar -->
+		<HBox alignment="CENTER_LEFT" spacing="10" styleClass="top-bar" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+			<children>
+				<Button onAction="#handleBack" styleClass="back-button" text="← Back" />
+			</children>
+		</HBox>
+
+		<!-- Left Menu Panel -->
+		<VBox layoutY="50.0" prefHeight="500.0" prefWidth="180.0" spacing="20" styleClass="side-panel" AnchorPane.leftAnchor="0">
+
+			<children>
+				<Button maxWidth="160.0" minHeight="40.0" mnemonicParsing="false" onAction="#subscriberDetailsBtn" styleClass="side-menu-button" text="Subscriber details" wrapText="true" />
+
+				<Button maxWidth="160.0" minHeight="40.0" mnemonicParsing="false" styleClass="side-menu-button" text="Parking active details" wrapText="true" />
+
+				<Button maxWidth="160.0" minHeight="40.0" mnemonicParsing="false" onAction="#reportsBtn" styleClass="side-menu-button" text="Parking Reports" wrapText="true" />
+				
+				<Button maxWidth="160.0" minHeight="40.0" mnemonicParsing="false" onAction="#MonthlyreportsBtn" styleClass="side-menu-button" text="Monthly Parking Reports" wrapText="true" />
+				
+			</children>
+			<padding>
+				<Insets left="15" right="15" top="30" />
+			</padding>
+		</VBox>
+
+		<!-- Main Content -->
+		<VBox layoutX="180.0" layoutY="60.0" spacing="20" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="0">
+			<children>
+
+				<!-- Page Title -->
+				<Label alignment="CENTER" styleClass="main-title" text="Parking Active Details" />
+
+				<!-- Table View -->
+				<TableView fx:id="parkingTable" prefHeight="360.0">
+					<columns>
+						<TableColumn fx:id="subscriberCodeCol" prefWidth="120.0" text="Subscriber Code" />
+						<TableColumn fx:id="confCodeCol" prefWidth="140.0" text="Confirmation Code" />
+						<TableColumn fx:id="carNumberCol" prefWidth="120.0" text="Car Number" />
+						<TableColumn fx:id="parkingSpaceCol" prefWidth="120.0" text="Parking Space" />
+						<TableColumn fx:id="delTimeCol" prefWidth="120.0" text="Delivery Time" />
+						<TableColumn fx:id="recTimeCol" prefWidth="120.0" text="Receiving Time" />
+					</columns>
+				</TableView>
+
+			</children>
+			<padding>
+				<Insets bottom="30" left="30" right="30" top="20" />
+			</padding>
+		</VBox>
+
+	</children>
+</AnchorPane>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="RegisterController"
+      alignment="CENTER"
+      spacing="10"
+      prefWidth="400"
+      prefHeight="500"
+      style="-fx-background-color: #f0f8ff;">
+
+    <padding>
+        <Insets top="30" bottom="30" left="40" right="40"/>
+    </padding>
+
+    <Label text="Subscriber Registration" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <Label text="Email" />
+    <TextField fx:id="emailField" promptText="Email" style="-fx-background-radius: 5; -fx-padding: 10;" />
+
+    <Label text="Phone Number" />
+    <TextField fx:id="phoneField" promptText="Phone Number" style="-fx-background-radius: 5; -fx-padding: 10;" />
+
+    <Label text="Username" />
+    <TextField fx:id="usernameField" promptText="Username" style="-fx-background-radius: 5; -fx-padding: 10;" />
+
+    <Label text="Password" />
+    <PasswordField fx:id="passwordField" promptText="Password" style="-fx-background-radius: 5; -fx-padding: 10;" />
+
+    <Button text="Register"
+            onAction="#handleRegister"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 5;" />
+
+    <Button text="Back"
+            onAction="#handleBack"
+            style="-fx-background-color: #ccc; -fx-padding: 8 20; -fx-background-radius: 5;" />
+
+    <Label fx:id="statusLabel" style="-fx-text-fill: red; -fx-font-size: 12px;"/>
+
+</VBox>
+

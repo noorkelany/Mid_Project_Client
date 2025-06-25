@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            fx:controller="extendsParkingTimeController"
+            stylesheets="@extends_parking_time.css"
+            prefHeight="200.0" prefWidth="450.0">
+
+    <!-- Top blue bar with title and back button -->
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT"
+              styleClass="top-bar">
+            <children>
+                <Button fx:id="btnBack" text="← Back"
+                        onAction="#handleBackToMainPage"
+                        styleClass="back-button" />
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Extend Parking Time"
+                       styleClass="top-bar-title" />
+                <Region HBox.hgrow="ALWAYS"/>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Main content layout -->
+    <center>
+        <VBox spacing="15" alignment="TOP_LEFT" style="-fx-padding: 30 40 20 40;">
+            <children>
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <children>
+                        <Label text="Extend time (in hour):"
+                               styleClass="label" />
+                        <Spinner fx:id="hourSpinner" prefWidth="100"/>
+                    </children>
+                </HBox>
+
+                <Button text="Send" onAction="#sendSelectedHour"
+                        styleClass="blue-button" />
+
+                <Label fx:id="statusLabel" wrapText="true"
+                       styleClass="status-label"/>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

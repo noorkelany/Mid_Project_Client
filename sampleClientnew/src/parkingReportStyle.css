@@ -1,0 +1,85 @@
+/* ======================
+   General Chart Styling
+   ====================== */
+
+/* Background color of charts */
+.chart {
+    -fx-background-color: #f5f8ff; /* light background */
+}
+
+/* Axis labels and chart legend text */
+.axis-label,
+.chart-legend-item-symbol {
+    -fx-text-fill: #333;          /* dark grey text */
+    -fx-font-size: 12px;
+}
+
+/* Transparent background for legend */
+.chart-legend {
+    -fx-background-color: transparent;
+}
+
+/* ============================
+   Chart Data Bar Colors
+   ============================ */
+
+/* Regular Duration (series 0) */
+.chart-bar.series0.default-color0 {
+    -fx-bar-fill: #64b5f6;  /* soft blue */
+}
+
+/* Extended Duration (series 1) */
+.chart-bar.series1.default-color1 {
+    -fx-bar-fill: #fbc02d;  /* golden yellow */
+}
+
+/* Late Returns (for specific chart ID) */
+#lateReturnChart .chart-bar.series0.default-color0 {
+    -fx-bar-fill: #ef5350;  /* calm red */
+}
+
+/* ======================
+   Top Toolbar Styling
+   ====================== */
+
+.tool-bar {
+    -fx-background-color: #1e3a74;
+}
+
+/* 'Back' button inside top bar */
+.tool-bar .button {
+    -fx-background-color: #1e88e5;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 6 12;
+    -fx-cursor: hand;
+}
+
+.tool-bar .button:hover {
+    -fx-background-color: rgba(255,255,255,0.1);
+}
+
+/* ======================
+   General Button Styling
+   ====================== */
+
+.button {
+    -fx-background-radius: 6px;
+    -fx-font-weight: bold;
+}
+
+/* Export to PDF button */
+#exportButton {
+    -fx-background-color: #2196f3;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+}
+
+#exportButton:hover {
+    -fx-background-color: #1976d2;
+}

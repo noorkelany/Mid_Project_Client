@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="220.0" prefWidth="280.0"
+	xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="OrderIDController"
+	stylesheets="@orderid.css" alignment="CENTER" spacing="15"
+	style="-fx-background-color: #f9f9f9; -fx-padding: 20;">
+
+	<Label fx:id="orderLabel" text="Enter Order ID:"
+		styleClass="form-label" />
+	<TextField fx:id="OrderIdtxt" maxWidth="180"
+		styleClass="green-field" />
+	<Button fx:id="btnSend" id="btnOrderInfo" text="Send"
+		onAction="#Send" styleClass="update-button" />
+	<Label fx:id="statusLabel" />
+</VBox>
+
+
+
+ 
+
+

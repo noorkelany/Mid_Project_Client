@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="SubscribermainPageController">
+
+    <TableView fx:id="historyTable" layoutX="0" layoutY="50" prefHeight="400.0" prefWidth="800.0">
+        <columns>
+            <TableColumn fx:id="orderNumberCol" text="Order Number" />
+            <TableColumn fx:id="orderDateCol" text="Order Date" />
+            <TableColumn fx:id="datePlacedCol" text="Date Of Placing Order" />
+            <TableColumn fx:id="parkingSpaceCol" text="Parking Space" />
+            <TableColumn fx:id="carNumberCol" text="Car Number" />
+            <TableColumn fx:id="startTimeCol" text="Start Time" />
+            <TableColumn fx:id="endTimeCol" text="End Time" />
+        </columns>
+    </TableView>
+</AnchorPane>

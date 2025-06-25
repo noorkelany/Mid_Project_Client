@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400" prefWidth="500"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="UpdateSubscriberInfoController">
+
+    <VBox layoutX="50" layoutY="30" prefWidth="400" spacing="15">
+        <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="Update Details">
+            <font>
+                <Font size="20" />
+            </font>
+        </Label>
+
+        <HBox spacing="10">
+            <Label prefWidth="100" text="Username:" />
+            <TextField fx:id="usernameField" prefWidth="250" />
+        </HBox>
+
+        <HBox spacing="10">
+            <Label prefWidth="100" text="Password:" />
+            <StackPane>
+                <TextField fx:id="visiblePasswordField" prefWidth="250" visible="false" managed="false"/>
+                <PasswordField fx:id="passwordField" prefWidth="250"/>
+            </StackPane>
+            <Button text="👁" onAction="#togglePasswordVisibility" />
+        </HBox>
+
+        <HBox spacing="10">
+            <Label prefWidth="100" text="Phone Number:" />
+            <TextField fx:id="phoneField" prefWidth="250" />
+        </HBox>
+
+        <HBox spacing="10">
+            <Label prefWidth="100" text="Email:" />
+            <TextField fx:id="emailField" prefWidth="250" />
+        </HBox>
+
+        <Button alignment="CENTER" onAction="#handleSave" prefWidth="150" text="Save Changes" />
+        <Label fx:id="statusLabel" textFill="red" />
+    </VBox>
+</AnchorPane>
+
+

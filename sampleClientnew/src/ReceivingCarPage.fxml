@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ReceivingCarController"
+            stylesheets="@orderid.css"
+            prefHeight="520.0" prefWidth="500.0"
+            styleClass="root">
+
+    <!-- Top blue bar -->
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="top-bar">
+            <children>
+                <Button fx:id="btnBack" text="← Back" onAction="#handleBackToMainPage" styleClass="back-button"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Car Receiving" styleClass="top-bar-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Main content -->
+    <center>
+        <VBox alignment="TOP_LEFT" spacing="16" style="-fx-padding: 40 40 40 40;">
+            <children>
+                <Label text="Enter Confirmation Code" styleClass="form-title"/>
+                <HBox spacing="10">
+                    <children>
+                        <TextField fx:id="parkingCodetxt" promptText="Confirmation Code"
+                                   styleClass="green-field" />
+                        <Button fx:id="btnSend" text="Get The Car" onAction="#Send"
+                                styleClass="primary-button"/>
+                    </children>
+                </HBox>
+
+                <Button fx:id="btnForgotCode" text="Forgot Code?" onAction="#ForgotCode"
+                        styleClass="forgot-button"/>
+
+                <Label fx:id="forgotCodeLabel" visible="false" wrapText="true" maxWidth="360"
+                       styleClass="message-box"/>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

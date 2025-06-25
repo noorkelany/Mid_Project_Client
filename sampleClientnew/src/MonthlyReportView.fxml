@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="MonthlyReportController"
+            stylesheets="@chartStyle.css"
+            prefWidth="850.0" prefHeight="700.0">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox styleClass="top-bar" spacing="10" alignment="CENTER_LEFT">
+            <children>
+                <Button fx:id="backButton" text="← Back" onAction="#handleBack" styleClass="back-button"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Monthly Parking Spot Report" styleClass="main-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+            </children>
+            <padding>
+                <Insets top="10" bottom="10" left="15" right="10"/>
+            </padding>
+        </HBox>
+    </top>
+
+    <!-- Main Content Area -->
+    <center>
+        <VBox spacing="20" alignment="TOP_CENTER" styleClass="main-content">
+            <!-- Show Table Button -->
+            <Button fx:id="toggleTableButton" text="Show Table"
+        onAction="#handleToggleTable" styleClass="action-button"/>
+
+
+            <!-- Table Container - Initially Hidden -->
+            <VBox fx:id="tableContainer" visible="false" managed="false">
+                <TableView fx:id="reportTable" minHeight="120" prefHeight="150">
+
+                    <columns>
+                        <TableColumn text="Subscriber Code" fx:id="subscriberCodeCol"/>
+                        <TableColumn text="Car Number" fx:id="carNumberCol"/>
+                        <TableColumn text="Date" fx:id="parkingDateCol"/>
+                        <TableColumn text="Start Time" fx:id="startTimeCol"/>
+                        <TableColumn text="End Time" fx:id="endTimeCol"/>
+                        <TableColumn text="Duration (min)" fx:id="durationCol"/>
+                        <TableColumn text="Extensions" fx:id="extendsCol"/>
+                        <TableColumn text="Warnings" fx:id="warningsCol"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <!-- Duration Chart -->
+            <BarChart fx:id="durationChart"
+                      title="Parking Duration (Regular vs Extended)"
+                      styleClass="duration-chart" prefHeight="250">
+                <xAxis>
+                    <CategoryAxis label="Parking Spot Code"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Duration (hours)"/>
+                </yAxis>
+            </BarChart>
+
+            <!-- Warnings Chart -->
+            <BarChart fx:id="warningChart"
+                      title="Number of Late Returns per Spot"
+                      styleClass="warning-chart" prefHeight="250">
+                <xAxis>
+                    <CategoryAxis label="Parking Spot Code"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Number of Late Returns"/>
+                </yAxis>
+            </BarChart>
+
+            <!-- Export PDF Button -->
+            <HBox alignment="CENTER" spacing="20">
+                <Button fx:id="pdfButton" text="Export to PDF"
+                        onAction="#handleExportPDF" styleClass="action-button"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="MakingOrderController"
+            stylesheets="@order.css"
+            prefWidth="700" prefHeight="700">
+
+    <!-- Top blue bar -->
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="top-bar">
+            <children>
+                <Button fx:id="backButton" text="← Back" onAction="#handleBack" styleClass="back-button"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Make Order" styleClass="top-bar-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Main content aligned to the left -->
+    <center>
+        <VBox spacing="20" alignment="TOP_LEFT" styleClass="main-pane">
+            <padding><Insets top="20" left="40" right="20" bottom="20"/></padding>
+
+            <!-- Grid form -->
+            <GridPane hgap="15" vgap="15" styleClass="form-grid">
+                <columnConstraints>
+                    <ColumnConstraints halignment="LEFT" minWidth="150"/>
+                    <ColumnConstraints halignment="LEFT" minWidth="300"/>
+                </columnConstraints>
+
+                <Label text="Pick a date:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="datePicker" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="form-control"/>
+
+                <Label text="Start hour:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="startHourComboBox" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="form-control"/>
+
+                <Label text="End hour:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="endHourComboBox" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="form-control"/>
+
+                <Button text="Order" onAction="#handleOrder"
+                        GridPane.rowIndex="3" GridPane.columnIndex="1"
+                        styleClass="primary-button"/>
+            </GridPane>
+
+            <Label fx:id="statusLabel" />
+
+            <ScrollPane fitToWidth="true" fitToHeight="true">
+                <GridPane fx:id="grid" hgap="20" vgap="20">
+                    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                </GridPane>
+            </ScrollPane>
+
+            <Button fx:id="placeOrderButton" text="Place Order" onAction="#handlePlaceOrder"
+                    disable="true" styleClass="primary-button"/>
+
+        </VBox>
+    </center>
+</BorderPane>

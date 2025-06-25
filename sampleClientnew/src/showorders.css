@@ -1,0 +1,46 @@
+.page-title {
+    -fx-background-color: #AFE1AF;
+    -fx-text-fill: black;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #2e7d32;
+    -fx-border-width: 2;
+    -fx-alignment: center;
+	
+}
+
+.table-view {
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI";
+}
+
+.table-view .column-header-background {
+    -fx-background-color: lightblue;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-row-cell:filled:selected {
+    -fx-background-color: #cce5ff;
+}
+
+.back-button {
+    -fx-background-color: #1b5e79;
+    -fx-text-fill: white;
+    -fx-padding: 6 16;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+}
+
+.back-button:hover {
+    -fx-background-color: #154c5b;
+}
