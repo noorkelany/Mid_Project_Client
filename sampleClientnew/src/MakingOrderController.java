@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import data.ParkingSpotsSession;
 import data.ResponseWrapper;
+import data.SubscriberSession;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,6 +50,10 @@ public class MakingOrderController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		if(SubscriberSession.getSubscriber()==null)
+		{
+			placeOrderButton.setVisible(false);
+		}
 		LocalDate now = LocalDate.now();
 		LocalDate minDate = now.plusDays(1);
 		LocalDate maxDate = now.plusDays(7);
