@@ -253,5 +253,15 @@ public class SubscriberMainController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	@FXML
+	void handleOrderParkingSpot()
+	{
+		try {
+			Main.switchScene("MakingOrder.fxml");
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 }
 

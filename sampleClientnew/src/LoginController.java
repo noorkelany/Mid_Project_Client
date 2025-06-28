@@ -1,11 +1,15 @@
-import javafx.event.ActionEvent;
 import java.io.IOException;
 
 import data.Login;
+import data.Manager;
 import data.ResponseWrapper;
-import data.SubscriberSession;
+import data.Role;
+import data.StaffSession;
 import data.Subscriber;
+import data.SubscriberSession;
+import data.Worker;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -70,13 +74,14 @@ public class LoginController {
 									    Main.switchScene("SubscriberMain.fxml");
 
 										break;
-
-
 									case "worker":
+										Worker worker = (Worker)rsp.getExtra();
+										StaffSession.getInstance().login(worker.getUsername(), Role.WORKER);
 										Main.switchScene("workerHomePage.fxml");
 										break;
-
 									case "manager":
+										Manager manager = (Manager)rsp.getExtra();
+										StaffSession.getInstance().login(manager.getUsername(), Role.ADMIN);
 										Main.switchScene("managerHomePage.fxml");
 										break;
 

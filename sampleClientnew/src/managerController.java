@@ -30,7 +30,6 @@ public class managerController extends workerController {
 			e.printStackTrace();
 		}
     }
-    @Override
     @FXML
     void parkingActiveDetailsBtn(ActionEvent event) {
         try {
@@ -44,12 +43,14 @@ public class managerController extends workerController {
     @FXML
 	private void handleBack(ActionEvent event) {
 	    try {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("SubscriberLogin.fxml"));
-	        Parent root = loader.load();
+	    	 // Load the previous FXML
+	        Parent previousRoot = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+
+	        // Get current stage from any control (e.g. the button)
 	        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	        stage.setScene(new Scene(root));
-	        stage.setTitle("BPARK - Subscriber Login");
-	        stage.show();
+
+	        // Replace the scene in the same window
+	        stage.setScene(new Scene(previousRoot));
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }

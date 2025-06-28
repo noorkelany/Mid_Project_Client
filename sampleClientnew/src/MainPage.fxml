@@ -11,46 +11,51 @@
 	fx:controller="MainPageController">
 	<children>
 
-		
+
 		<HBox layoutX="0" layoutY="0" prefWidth="921.0" prefHeight="60.0"
 			spacing="10" styleClass="top-bar">
 			<children>
 				<Label text="🚗"
 					style="-fx-font-size: 42px; -fx-text-fill: white;" />
-				<Label text=" WELCOME TO BPARK" styleClass="top-title-centered" />
+				<Label text=" WELCOME TO BPARK"
+					styleClass="top-title-centered" />
 			</children>
 		</HBox>
 
-		
+
 		<HBox layoutX="0" layoutY="60.0" prefHeight="540.0"
 			prefWidth="900.0">
 
-			
+
 			<VBox spacing="12.0" prefWidth="220.0" styleClass="nav-pane">
 				<children>
-					<Label text="User" styleClass="group-title" />
-					<Button styleClass="nav-button" text="Login"
-						onAction="#handleOrders" />
+					<VBox fx:id="loginBox">
+						<Label text="User" styleClass="group-title" />
+						<Button styleClass="nav-button" text="Login"
+							onAction="#handleLogin" fx:id="loginBtn" />
+					</VBox>
+
 					<Line endX="200" stroke="gray" strokeWidth="1" />
 					<Label text="User Actions" styleClass="group-title" />
-					<Button styleClass="nav-button" text="Order Parking Spot"
+					<Button styleClass="nav-button"
+						text="View available parking spots"
 						onAction="#handleOrderParkingSpot" />
 					<Line endX="200" stroke="gray" strokeWidth="1" />
 
-					<Label text="Reports" styleClass="group-title" />
-					<Button styleClass="nav-button" text="Report 1"
-						onAction="#handleGeneratingReport1" />
-					<Button styleClass="nav-button" text="Report 2"
-						onAction="#handleGeneratingReport2" />
-					<Line endX="200" stroke="gray" strokeWidth="1" />
+					<!-- <Label text="Reports" styleClass="group-title" /> <Button styleClass="nav-button" 
+						text="Report 1" onAction="#handleGeneratingReport1" /> <Button styleClass="nav-button" 
+						text="Report 2" onAction="#handleGeneratingReport2" /> <Line endX="200" stroke="gray" 
+						strokeWidth="1" /> -->
 
 					<Label text="Staff" styleClass="group-title" />
 					<Button styleClass="nav-button" text="Worker"
-						onAction="#workerBtn" />
+						onAction="#workerBtn" fx:id="workerBtn" />
+					<Button styleClass="nav-button" text="Manager"
+						onAction="#handleManagerBtn" />
 				</children>
 			</VBox>
 
-			
+
 			<AnchorPane prefWidth="680.0" styleClass="main-content">
 				<ImageView fx:id="logoImage" fitWidth="680.0"
 					preserveRatio="false" AnchorPane.topAnchor="0.0"

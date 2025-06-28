@@ -28,6 +28,7 @@
                 <Button styleClass="side-menu-button" onAction="#carDeliveryBtnClicked"  text="Car Delivery" />
                 <Button styleClass="side-menu-button" text="Car Receiving " onAction="#handleRegister" />
                 <Button styleClass="side-menu-button" text="Extend Parking Time" onAction="#handleExtendsParkingTime" />
+                <Button styleClass="side-menu-button" text="Order parking spot" onAction="#handleOrderParkingSpot" />
             </children>
             <padding><Insets top="40" /></padding>
         </VBox>

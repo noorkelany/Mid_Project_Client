@@ -8,9 +8,14 @@ import data.ParkingSpotsSession;
 import data.ResponseWrapper;
 import data.SubscriberSession;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
@@ -21,6 +26,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class MakingOrderController implements Initializable {
@@ -50,8 +56,7 @@ public class MakingOrderController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if(SubscriberSession.getSubscriber()==null)
-		{
+		if (SubscriberSession.getSubscriber() == null) {
 			placeOrderButton.setVisible(false);
 		}
 		LocalDate now = LocalDate.now();
@@ -189,12 +194,21 @@ public class MakingOrderController implements Initializable {
 		}
 	}
 
-	public void handleBack() {
+	public void handleBack(ActionEvent event) {
 		try {
-			Main.switchScene("MainPage.fxml");
+			// Load the previous FXML
+			Parent previousRoot = FXMLLoader.load(getClass().getResource("SubscriberMain.fxml"));
+			// Get current stage from any control (e.g. the button)
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			// Replace the scene in the same window
+			stage.setScene(new Scene(previousRoot));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		/*
+		 * try { Main.switchScene("MainPage.fxml"); } catch (Exception e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 	}
 }

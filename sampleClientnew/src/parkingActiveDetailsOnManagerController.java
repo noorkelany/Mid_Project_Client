@@ -21,44 +21,42 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class parkingActiveDetailsOnManagerController extends parkingActiveDetailsController {
-	
-    @FXML
-    void reportsBtn(ActionEvent event) throws Exception {
+
+	@FXML
+	void reportsBtn(ActionEvent event) throws Exception {
 		Main.switchScene("parkingSpotReport.fxml");
-    }
-    
-    @FXML
-    void MonthlyreportsBtn(ActionEvent event) {
+	}
+
+	@FXML
+	void MonthlyreportsBtn(ActionEvent event) {
 		try {
 			Main.switchScene("MonthlyReportView.fxml");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
-    
-    @Override
-    @FXML
-    void subscriberDetailsBtn(ActionEvent event) {
-    	try {
+	}
+
+	@Override
+	@FXML
+	void subscriberDetailsBtn(ActionEvent event) {
+		try {
 			Main.switchScene("managerHomePage.fxml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    }
-    
-    @FXML
-    private void handleBack(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("SubscriberLogin.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Subscriber Login");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	}
+
+	@FXML
+	private void handleBack(ActionEvent event) {
+
+		try {
+			Main.switchScene("MainPage.fxml");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 
 }

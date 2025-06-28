@@ -87,7 +87,17 @@ public class extendsParkingTimeController {
 	
 	@FXML
     public void handleBackToMainPage(ActionEvent event) {
-        try {
+		try {
+			// Load the previous FXML
+			Parent previousRoot = FXMLLoader.load(getClass().getResource("SubscriberMain.fxml"));
+			// Get current stage from any control (e.g. the button)
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			// Replace the scene in the same window
+			stage.setScene(new Scene(previousRoot));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+       /* try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
@@ -96,7 +106,7 @@ public class extendsParkingTimeController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 }
