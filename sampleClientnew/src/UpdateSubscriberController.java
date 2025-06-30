@@ -3,10 +3,14 @@ import data.SubscriberSession;
 import data.ResponseWrapper;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -108,6 +112,70 @@ public class UpdateSubscriberController implements Initializable {
     private void handleSubscriberOrders() {
         try {
             Main.switchScene("SubscriberMain.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+  
+
+    /*@FXML
+    public void handleSubscriberOrders() {
+        if (SubscriberSession.getSubscriber() != null) {
+            int subscriberId = SubscriberSession.getSubscriber().getCode();
+            ResponseWrapper request = new ResponseWrapper("SubscriberHistory", subscriberId);
+            Main.clientConsole.accept(request);
+        }
+    }*/
+
+    @FXML
+    private void handleUpdateSubscriber() {
+        try {
+            Main.switchScene("UpdateSubscriber.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void carDeliveryBtnClicked() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CarDelivery2.fxml"));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("CarDelivery.css").toExternalForm());
+
+            Stage stage = new Stage();
+            stage.setTitle("Car Delivery");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void handleRegister() {
+        try {
+            Main.switchScene("ReceivingCarPage.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void handleExtendsParkingTime() {
+        try {
+            Main.switchScene("ExtendParkingTime.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    public void handleOrdersstatus() {
+        try {
+            Main.switchScene("OrderStatus.fxml");
         } catch (Exception e) {
             e.printStackTrace();
         }

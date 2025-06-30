@@ -28,6 +28,10 @@
             <children>
                 <Button styleClass="side-menu-button-selected" text="Update details" />
                 <Button onAction="#handleSubscriberOrders" styleClass="side-menu-button" text="Orders" />
+                <Button onAction="#handleOrdersstatus" styleClass="side-menu-button" text="Orders Status" />
+                <Button onAction="#carDeliveryBtnClicked" styleClass="side-menu-button" text="Car Delivery" />
+                <Button onAction="#handleRegister" styleClass="side-menu-button" text="Car Receiving " />
+                <Button onAction="#handleExtendsParkingTime" styleClass="side-menu-button" text="Extend Parking Time" />
             </children>
             <padding><Insets top="40" /></padding>
         </VBox>
