@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600" prefWidth="875.0" stylesheets="@OrderStatus.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OrderStatusController">
+<BorderPane prefHeight="600" prefWidth="945.0" stylesheets="@OrderStatus.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OrderStatusController">
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
@@ -41,9 +41,9 @@
                     <TableColumn fx:id="parkingspaceCol" prefWidth="96.66661071777344" text="parking Space" />
                     <TableColumn fx:id="orderDateCol" prefWidth="102.66668701171875" text="Order Date" />
                     <TableColumn fx:id="ordertimeCol" prefWidth="105.3333740234375" text="Order Time" />
-                    <TableColumn fx:id="orderstatusCol" prefWidth="91.33334350585938" text="Status" />
-                    <TableColumn fx:id="numberofextendsCol" prefWidth="122.66668701171875" text="number Of Extends" />
-               <TableColumn fx:id="recivingcartimeCol1" prefWidth="142.0" text="receiving Car Time" />
+                    <TableColumn fx:id="orderstatusCol" prefWidth="87.99996948242188" text="Status" />
+                    <TableColumn fx:id="numberofextendsCol" prefWidth="155.99993896484375" text="number Of Extends" />
+               <TableColumn fx:id="recivingcartimeCol1" prefWidth="184.666748046875" text="receiving Car Time" />
                 </columns>
             </TableView>
         </VBox>
