@@ -157,6 +157,7 @@ public class CarDelivery implements Initializable {
 	            if (!modelField.getStyleClass().contains("error-border")) {
 	                modelField.getStyleClass().add("error-border");
 	            }
+	            //
 	            modelLabel.setVisible(true);
 	        } else {
 	            modelField.getStyleClass().remove("error-border");
