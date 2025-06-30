@@ -73,3 +73,14 @@
     -fx-font-size: 13px;
     -fx-text-fill: red;
 }
+/*style for the link */
+.qr-login-link {
+    -fx-text-fill: #0066cc;
+    -fx-underline: true;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+}
+.qr-login-link:hover {
+    -fx-text-fill: #004c99;
+}
+

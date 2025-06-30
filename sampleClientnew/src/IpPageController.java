@@ -19,8 +19,7 @@ public class IpPageController {
             try {
             	//start the main page 
                 Main.clientConsole = new ClientConsole(ip, 5555);
-                //Main.switchScene("MainPage.fxml");
-                Main.switchScene("CarDelivery2.fxml");
+                Main.switchScene("MainPage.fxml");
             } catch (Exception e) {
                 errorTextArea.setText("Failed to connect to server.");
                 e.printStackTrace();

@@ -66,32 +66,32 @@ public class LoginController {
 						String type = rsp.getType(); // תיקון קריטי
 
 						switch (type) {
-							case "LOGIN_RESPONSE":
-								switch (rsp.getData().toString()) {
-									case "subscriber":
-									    Subscriber sub = (Subscriber) rsp.getExtra();
-									    SubscriberSession.setSubscriber(sub);
-									    Main.switchScene("SubscriberMain.fxml");
+						case "LOGIN_RESPONSE":
+							switch (rsp.getData().toString()) {
+							case "subscriber":
+								Subscriber sub = (Subscriber) rsp.getExtra();
+								SubscriberSession.setSubscriber(sub);
+								Main.switchScene("SubscriberMain.fxml");
 
-										break;
-									case "worker":
-										Worker worker = (Worker)rsp.getExtra();
-										StaffSession.getInstance().login(worker.getUsername(), Role.WORKER);
-										Main.switchScene("workerHomePage.fxml");
-										break;
-									case "manager":
-										Manager manager = (Manager)rsp.getExtra();
-										StaffSession.getInstance().login(manager.getUsername(), Role.ADMIN);
-										Main.switchScene("managerHomePage.fxml");
-										break;
-
-									default:
-										showLoginError();
-								}
+								break;
+							case "worker":
+								Worker worker = (Worker) rsp.getExtra();
+								StaffSession.getInstance().login(worker.getUsername(), Role.WORKER);
+								Main.switchScene("workerHomePage.fxml");
+								break;
+							case "manager":
+								Manager manager = (Manager) rsp.getExtra();
+								StaffSession.getInstance().login(manager.getUsername(), Role.ADMIN);
+								Main.switchScene("managerHomePage.fxml");
 								break;
 
 							default:
 								showLoginError();
+							}
+							break;
+
+						default:
+							showLoginError();
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -159,21 +159,28 @@ public class LoginController {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	@FXML
-	private void handleBack(ActionEvent event) {
-	    try {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
-	        Parent root = loader.load();
-	        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	        stage.setScene(new Scene(root));
-	        stage.setTitle("BPARK - Main Page");
-	        stage.show();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+	private void handleQRLoginLink() {
+		try {
+			Main.switchScene("QRCode.fxml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
+	@FXML
+	private void handleBack(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
+			Parent root = loader.load();
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(new Scene(root));
+			stage.setTitle("BPARK - Main Page");
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

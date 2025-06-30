@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+	fx:controller="QRCodeLoginController" prefWidth="400" prefHeight="250">
+	<VBox spacing="15.0" alignment="CENTER"
+		AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0"
+		AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0">
+
+		<Label text="Scan QR Code (Enter Code)"
+			style="-fx-font-size: 16px;" />
+
+		<TextField fx:id="codeField" promptText="Enter your code..."
+			maxWidth="250" />
+
+		<Button text="Login" onAction="#handleLogin" maxWidth="150" />
+
+		<Label fx:id="statusLabel" textFill="red" wrapText="true"
+			maxWidth="300" />
+
+	</VBox>
 </AnchorPane>
-

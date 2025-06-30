@@ -94,7 +94,6 @@ public class SubscriberMainController implements Initializable {
 }
 */
 
-
 import data.Order;
 import data.SubscriberSession;
 import data.ResponseWrapper;
@@ -120,101 +119,106 @@ import java.util.ResourceBundle;
 
 public class SubscriberMainController implements Initializable {
 
-    @FXML private TableView<Order> historyTable;
-    @FXML private TableColumn<Order, Integer> orderNumberCol;
-    @FXML private TableColumn<Order, String> orderDateCol;
-    @FXML private TableColumn<Order, String> datePlacedCol;
-    @FXML private TableColumn<Order, String> parkingSpaceCol;
-    @FXML private TableColumn<Order, String> carNumberCol;
-    @FXML private TableColumn<Order, LocalDateTime> startTimeCol; // שונה ל-LocalDateTime
-    @FXML private TableColumn<Order, LocalDateTime> endTimeCol;   // שונה ל-LocalDateTime
+	@FXML
+	private TableView<Order> historyTable;
+	@FXML
+	private TableColumn<Order, Integer> orderNumberCol;
+	@FXML
+	private TableColumn<Order, String> orderDateCol;
+	@FXML
+	private TableColumn<Order, String> datePlacedCol;
+	@FXML
+	private TableColumn<Order, String> parkingSpaceCol;
+	@FXML
+	private TableColumn<Order, String> carNumberCol;
+	@FXML
+	private TableColumn<Order, LocalDateTime> startTimeCol; // שונה ל-LocalDateTime
+	@FXML
+	private TableColumn<Order, LocalDateTime> endTimeCol; // שונה ל-LocalDateTime
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        orderNumberCol.setCellValueFactory(new PropertyValueFactory<>("order_number"));
-        orderDateCol.setCellValueFactory(new PropertyValueFactory<>("order_date"));
-        datePlacedCol.setCellValueFactory(new PropertyValueFactory<>("date_of_placing_an_order"));
-        parkingSpaceCol.setCellValueFactory(new PropertyValueFactory<>("parking_space"));
-        carNumberCol.setCellValueFactory(new PropertyValueFactory<>("carNumber"));
-        startTimeCol.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        endTimeCol.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		orderNumberCol.setCellValueFactory(new PropertyValueFactory<>("order_number"));
+		orderDateCol.setCellValueFactory(new PropertyValueFactory<>("order_date"));
+		datePlacedCol.setCellValueFactory(new PropertyValueFactory<>("date_of_placing_an_order"));
+		parkingSpaceCol.setCellValueFactory(new PropertyValueFactory<>("parking_space"));
+		carNumberCol.setCellValueFactory(new PropertyValueFactory<>("carNumber"));
+		startTimeCol.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+		endTimeCol.setCellValueFactory(new PropertyValueFactory<>("endTime"));
 
-        // פורמט להצגת תאריך ושעה בלי T
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		// פורמט להצגת תאריך ושעה בלי T
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-        startTimeCol.setCellFactory(column -> new TableCell<Order, LocalDateTime>() {
-            @Override
-            protected void updateItem(LocalDateTime item, boolean empty) {
-                super.updateItem(item, empty);
-                setText((empty || item == null) ? null : item.format(formatter));
-            }
-        });
+		startTimeCol.setCellFactory(column -> new TableCell<Order, LocalDateTime>() {
+			@Override
+			protected void updateItem(LocalDateTime item, boolean empty) {
+				super.updateItem(item, empty);
+				setText((empty || item == null) ? null : item.format(formatter));
+			}
+		});
 
-        endTimeCol.setCellFactory(column -> new TableCell<Order, LocalDateTime>() {
-            @Override
-            protected void updateItem(LocalDateTime item, boolean empty) {
-                super.updateItem(item, empty);
-                setText((empty || item == null) ? null : item.format(formatter));
-            }
-        });
+		endTimeCol.setCellFactory(column -> new TableCell<Order, LocalDateTime>() {
+			@Override
+			protected void updateItem(LocalDateTime item, boolean empty) {
+				super.updateItem(item, empty);
+				setText((empty || item == null) ? null : item.format(formatter));
+			}
+		});
 
-        historyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        historyTable.setEditable(false);
+		historyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		historyTable.setEditable(false);
 
-        
-        Main.clientConsole = new ClientConsole(Main.serverIP, 5555) {
-            @Override
-            public void display(Object message) {
-                if (message instanceof ResponseWrapper wrapper &&
-                        wrapper.getType().equals("SubscriberHistoryResult")) {
+		Main.clientConsole = new ClientConsole(Main.serverIP, 5555) {
+			@Override
+			public void display(Object message) {
+				if (message instanceof ResponseWrapper wrapper && wrapper.getType().equals("SubscriberHistoryResult")) {
 
-                    Object data = wrapper.getData();
-                    if (data instanceof List<?> list && !list.isEmpty() && list.get(0) instanceof Order) {
-                        ObservableList<Order> observableOrders =
-                                FXCollections.observableArrayList((List<Order>) list);
+					Object data = wrapper.getData();
+					if (data instanceof List<?> list && !list.isEmpty() && list.get(0) instanceof Order) {
+						ObservableList<Order> observableOrders = FXCollections.observableArrayList((List<Order>) list);
 
-                        Platform.runLater(() -> historyTable.setItems(observableOrders));
-                    }
-                }
-            }
-        };
+						Platform.runLater(() -> historyTable.setItems(observableOrders));
+					}
+				}
+			}
+		};
 
-        // שליחת בקשת היסטוריה
-        if (SubscriberSession.getSubscriber() != null) {
-            int subscriberId = SubscriberSession.getSubscriber().getCode();
-            ResponseWrapper request = new ResponseWrapper("SubscriberHistory", subscriberId);
-            Main.clientConsole.accept(request);
-        }
-    }
+		// שליחת בקשת היסטוריה
+		if (SubscriberSession.getSubscriber() != null) {
+			int subscriberId = SubscriberSession.getSubscriber().getCode();
+			ResponseWrapper request = new ResponseWrapper("SubscriberHistory", subscriberId);
+			Main.clientConsole.accept(request);
+		}
+	}
 
-    @FXML
-    private void handleLogout() {
-        try {
-        	SubscriberSession.setSubscriber(null);
-            Main.switchScene("MainPage.fxml");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	@FXML
+	private void handleLogout() {
+		try {
+			SubscriberSession.setSubscriber(null);
+			Main.switchScene("MainPage.fxml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    @FXML
-    public void handleSubscriberOrders() {
-        if (SubscriberSession.getSubscriber() != null) {
-            int subscriberId = SubscriberSession.getSubscriber().getCode();
-            ResponseWrapper request = new ResponseWrapper("SubscriberHistory", subscriberId);
-            Main.clientConsole.accept(request);
-        }
-    }
+	@FXML
+	public void handleSubscriberOrders() {
+		if (SubscriberSession.getSubscriber() != null) {
+			int subscriberId = SubscriberSession.getSubscriber().getCode();
+			ResponseWrapper request = new ResponseWrapper("SubscriberHistory", subscriberId);
+			Main.clientConsole.accept(request);
+		}
+	}
 
-    @FXML
-    private void handleUpdateSubscriber() {
-        try {
-            Main.switchScene("UpdateSubscriber.fxml");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
+	@FXML
+	private void handleUpdateSubscriber() {
+		try {
+			Main.switchScene("UpdateSubscriber.fxml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@FXML
 	public void carDeliveryBtnClicked() {
 		try {
@@ -230,13 +234,12 @@ public class SubscriberMainController implements Initializable {
 			stage.setTitle("Car Delivery");
 			stage.setScene(scene);
 			stage.show();
-
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void handleRegister() {
 		try {
 			Main.switchScene("ReceivingCarPage.fxml");
@@ -244,7 +247,6 @@ public class SubscriberMainController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	 
 	@FXML
 	void handleExtendsParkingTime() {
 		try {
@@ -254,14 +256,11 @@ public class SubscriberMainController implements Initializable {
 		}
 	}
 	@FXML
-	void handleOrderParkingSpot()
-	{
+	void handleOrderParkingSpot() {
 		try {
 			Main.switchScene("MakingOrder.fxml");
-		}catch(Exception e)
-		{
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 }
-

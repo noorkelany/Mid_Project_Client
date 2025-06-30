@@ -71,7 +71,7 @@ public class CarDeliveryControllerWithCode {
                             deliverCarClicked.setVisible(true);
                             outputLabel.setVisible(true);                            
                         }else {
-                            outputLabel.setText("❌ Invalid confirmation code. Please try again.");
+                            outputLabel.setText("❌ Invalid confirmation code. Please try again.\n Or your order date isn't today, or maybe the time has'nt arrived");
                             outputLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: red; -fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 10px; -fx-background-color: #ffe5e5;");
                             deliverCarClicked.setVisible(false);
                             outputLabel.setVisible(true);
@@ -101,7 +101,7 @@ public class CarDeliveryControllerWithCode {
             outputLabel.setVisible(true);
             deliverCarClicked.setVisible(false);
         } else {
-            ResponseWrapper request = new ResponseWrapper("CHECK_USER_CONFORMATION_CODE", inputCode);
+            ResponseWrapper request = new ResponseWrapper("CHECK_USER_CONFORMATION_CODE", inputCode,SubscriberSession.getSubscriber().getCode());
             Main.clientConsole.accept(request);
         }
     }
@@ -125,7 +125,6 @@ public class CarDeliveryControllerWithCode {
                 deliverCarClicked.setVisible(false);
                 return;
             }
-            
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CarDelivery.fxml"));
             Parent root = loader.load();
