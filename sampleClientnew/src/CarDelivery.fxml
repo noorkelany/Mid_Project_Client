@@ -1,55 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="CarDelivery"
-            stylesheets="@carDelivery_style.css"
-            styleClass="root"
-            prefHeight="520.0" prefWidth="600.0">
+<BorderPane prefHeight="520.0" prefWidth="600.0" styleClass="root" stylesheets="@carDelivery_style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CarDelivery">
 
     <!-- Top bar with back button and centered title -->
     <top>
-        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="top-bar">
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="top-bar">
             <children>
-                <Button fx:id="btnBack" text="← Back" onAction="#handleBackToMainPage"
-                        styleClass="back-button"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label text="Car Delivery" styleClass="top-bar-title"/>
-                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnBack" onAction="#handleBackToMainPage" styleClass="back-button" text="← Back" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label styleClass="top-bar-title" text="Car Delivery" />
+                <Region HBox.hgrow="ALWAYS" />
             </children>
         </HBox>
     </top>
 
     <!-- Form center layout -->
     <center>
-        <VBox spacing="15" alignment="TOP_LEFT" style="-fx-padding: 40 40 40 60;">
+        <VBox alignment="TOP_LEFT" spacing="15" style="-fx-padding: 40 40 40 60;">
             <children>
-                <Label fx:id="successLabel" text="Car delivered successfully"
-                       textFill="#669644" visible="false" styleClass="result-label"/>
+                <Label fx:id="successLabel" styleClass="result-label" text="Car delivered successfully" textFill="#669644" visible="false" />
 
-                <Label text="Car number: *" styleClass="label"/>
-                <TextField fx:id="carNumberField" promptText="Car number xxxxxxxr" styleClass="text-field"/>
+                      <Label styleClass="label" text="Car number: *" />
+                <TextField fx:id="carNumberField" promptText="Car number xxxxxxxr" styleClass="text-field" />
+            <Label fx:id="carNumberLabel" style="-fx-font-size: 12; -fx-text-fill: red;" text="Enter a 7 or 8 digit car number, digits only (e.g., 1234567 or 12345678).">
+               <VBox.margin>
+                  <Insets left="10.0" top="-10.0" />
+               </VBox.margin>
+            </Label>
 
-                <Label text="Model: *" styleClass="label"/>
-                <TextField fx:id="modelField" promptText="Model" styleClass="text-field"/>
+                      <Label styleClass="label" text="Model: *" />
+                <TextField fx:id="modelField" promptText="Model" styleClass="text-field" />
+            <Label fx:id="modelLabel" style="-fx-font-size: 12; -fx-text-fill: red;" text="Only letters A–Z, a–z, and spaces are allowed.">
+               <VBox.margin>
+                  <Insets left="10.0" top="-10.0" />
+               </VBox.margin>
+            </Label>
 
-                <Label text="Year: *" styleClass="label"/>
-                <TextField fx:id="yearField" promptText="Year" styleClass="text-field"/>
+                      <Label styleClass="label" text="Year: *" />
+                <TextField fx:id="yearField" promptText="Year" styleClass="text-field" />
+            <Label fx:id="yearLabel" style="-fx-font-size: 12; -fx-text-fill: red;" text="Enter a valid 4-digit year (1900 to [next year]).">
+               <VBox.margin>
+                  <Insets left="10.0" top="-10.0" />
+               </VBox.margin>
+            </Label>
 
-                <Label text="Extend time (in hour):" styleClass="label"/>
-                <Spinner fx:id="hourSpinner"/>
+                      <Label styleClass="label" text="Extend time (in hour):" />
+                <Spinner fx:id="hourSpinner" />
 
-                <Label fx:id="emptyLabels" text="*You have empty fields"
-                       visible="false" styleClass="result-label"/>
+                      <Label fx:id="emptyLabels" styleClass="result-label" text="*You have empty fields" visible="false" />
 
                 <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 0 0 0 0;">
                     <children>
              
-                        <Button text="Delivery" prefWidth="260.0" onAction="#DeliveryButton" styleClass="button"/>
+                          <Button onAction="#DeliveryButton" prefWidth="260.0" styleClass="button" text="Delivery" />
                     </children>
                 </HBox>
             </children>

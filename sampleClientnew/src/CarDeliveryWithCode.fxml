@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -12,7 +10,7 @@
 
 <!-- Main layout for Car Delivery screen -->
 
-<BorderPane prefHeight="200.0" prefWidth="550.0" styleClass="root" stylesheets="@CarDelivery.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CarDeliveryController">
+<BorderPane prefHeight="200.0" prefWidth="550.0" styleClass="root" stylesheets="@CarDelivery.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CarDeliveryControllerWithCode">
 
     <!-- Top blue bar with back button and centered white title -->
     <top>
@@ -25,13 +23,11 @@
             </children>
         </HBox>
     </top>
-
-    <!-- Form area aligned to the left -->
     <center>
         <VBox alignment="TOP_LEFT" spacing="20" style="-fx-padding: 40 40 40 60;">
             <children>
                 <!-- Input field label -->
-                <Label styleClass="label" text="Subscription Code" />
+                <Label styleClass="label" text="confirmation code" />
 
                 <!-- Input and button in one row -->
                 <HBox prefWidth="450.0" spacing="10">
@@ -40,14 +36,6 @@
                         <Button onAction="#checkCodeClicked" styleClass="button" text="Check Code" />
                     </children>
                 </HBox>
-            <Label onMouseClicked="#confCode" style="-fx-text-fill: #0090ff;" styleClass="conCodelabel" stylesheets="@CarDelivery.css" text="I have alerady conformation code" textFill="#0090ff">
-               <VBox.margin>
-                  <Insets left="3.0" />
-               </VBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
 
                 <!-- Output label shown after checking -->
                 <Label fx:id="outputLabel" prefWidth="500.0" styleClass="result-label" visible="false" wrapText="true" />

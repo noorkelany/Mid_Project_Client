@@ -5,7 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -18,13 +17,15 @@ import java.sql.Date;
 
 import data.Order;
 import data.ResponseWrapper;
+import data.Subscriber;
+import data.SubscriberSession;
 
 /**
  * Controller class for the Car Delivery GUI.
  * Handles subscription code input, validation with the server,
  * displays feedback messages to the user, and opens the delivery window.
  */
-public class CarDeliveryController {
+public class CarDeliveryControllerWithCode {
 
     /** Holds the parking spot number received from the server */
     private String msg;
@@ -43,11 +44,11 @@ public class CarDeliveryController {
     /** Button used to proceed with delivering the car */
     @FXML
     private Button deliverCarClicked;
-
+    ResponseWrapper respone;
+    
     /**
-     * Called automatically after FXML components are loaded.
-     * Initializes the client console and sets up message handling
-     * from the server related to subscription code checking.
+     * this function initialize for if the client get response from the server
+     * for check the confirmation code and print relevant message
      */
     @FXML
     public void initialize() {
@@ -63,27 +64,17 @@ public class CarDeliveryController {
             public void display(Object message) {
                 Platform.runLater(() -> {
                     if (message instanceof ResponseWrapper rsp) {
-                        if ("CHECK_USER_CODE_RESULT".equals(rsp.getType())) {
-                            Object data = rsp.getData();
-                            if (data instanceof String receivedMsg) {
-                                msg = receivedMsg;
-
-                                if ("Invalid Code".equals(msg)) {
-                                    outputLabel.setText("❌ Invalid subscription code. Please try again.");
-                                    outputLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: red; -fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 10px; -fx-background-color: #ffe5e5;");
-                                    deliverCarClicked.setVisible(false);
-                                } else if ("FULL".equals(msg)) {
-                                    outputLabel.setText("❌ The Parking is Full");
-                                    outputLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: red; -fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 10px; -fx-background-color: #ffe5e5;");
-                                    deliverCarClicked.setVisible(false);
-                                } else {
-                                    outputLabel.setText("✅press delivery to deliver the car");
-                                    outputLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: green; -fx-border-color: green; -fx-border-width: 2px; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 10px; -fx-background-color: #e6ffe6;");
-                                    deliverCarClicked.setVisible(true);
-                                }
-                                outputLabel.setVisible(true);
-
-                            }
+                        if ("CORRECT_CONFORMATION_CODE".equals(rsp.getType())) {
+                        	respone = rsp;
+                            outputLabel.setText("✅press delivery to deliver the car");
+                            outputLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: green; -fx-border-color: green; -fx-border-width: 2px; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 10px; -fx-background-color: #e6ffe6;");
+                            deliverCarClicked.setVisible(true);
+                            outputLabel.setVisible(true);                            
+                        }else {
+                            outputLabel.setText("❌ Invalid confirmation code. Please try again.");
+                            outputLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: red; -fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 10px; -fx-background-color: #ffe5e5;");
+                            deliverCarClicked.setVisible(false);
+                            outputLabel.setVisible(true);
                         }
                     }
                 });
@@ -95,7 +86,7 @@ public class CarDeliveryController {
     
     /**
      * Called when the "Check Code" button is clicked.
-     * Sends the entered subscription code to the server for validation.
+     * Sends the entered confirmation code to the server for validation.
      * Displays warning if the field is empty.
      */
     @FXML
@@ -103,12 +94,14 @@ public class CarDeliveryController {
         String inputCode = subscriptionCodeField.getText();
         outputLabel.setVisible(false);                            
         deliverCarClicked.setVisible(false);
+        
         if (inputCode == null || inputCode.trim().isEmpty()) {
-            outputLabel.setText("⚠️Please enter a subscription code.");
+            outputLabel.setText("⚠️Please enter a conformation code.");
             outputLabel.setTextFill(Color.ORANGE);
             outputLabel.setVisible(true);
+            deliverCarClicked.setVisible(false);
         } else {
-            ResponseWrapper request = new ResponseWrapper("CHECK_USER_CODE", inputCode);
+            ResponseWrapper request = new ResponseWrapper("CHECK_USER_CONFORMATION_CODE", inputCode);
             Main.clientConsole.accept(request);
         }
     }
@@ -126,26 +119,19 @@ public class CarDeliveryController {
             code = subscriptionCodeField.getText();
 
             if (code == null || code.trim().isEmpty()) {
-                outputLabel.setText("⚠️ Enter subscription code before delivery.");
+                outputLabel.setText("⚠️Enter conformation code before delivery.");
                 outputLabel.setTextFill(Color.ORANGE);
                 outputLabel.setVisible(true);
+                deliverCarClicked.setVisible(false);
                 return;
             }
-
-            int subscriberId = Integer.parseInt(code);
-            //int parkingNumber = Integer.parseInt(msg);
-
-            Order order1 = new Order(
-                //parkingNumber,
-                subscriberId
-            );
-
+            
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CarDelivery.fxml"));
             Parent root = loader.load();
 
             CarDelivery controller = loader.getController();
-            controller.setOrder(order1);
+            controller.setOrderWithCode((Order)respone.getData(),(Subscriber)respone.getExtra());
 
             Stage stage = new Stage();
             stage.setTitle("Delivery Confirmation");
@@ -161,20 +147,11 @@ public class CarDeliveryController {
             outputLabel.setVisible(true);
         }
     }
-    
-    @FXML
-    void confCode(MouseEvent event) {
-        try {
-            Main.switchScene("CarDeliveryWithCode.fxml");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
+
     @FXML
     public void handleBackToMainPage(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CarDelivery2.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
