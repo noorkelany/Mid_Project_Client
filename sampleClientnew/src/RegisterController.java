@@ -2,95 +2,119 @@ import java.util.regex.Pattern;
 
 import data.Subscriber;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.control.Label;
 
 /**
- * Controller for handling subscriber registration form. Validates input fields
- * and sends registration data to the server. Implemented by the student as part
- * of the BPARK system.
+ * Controller for handling subscriber registration form.
  */
-
 public class RegisterController {
-	@FXML
-	private TextField emailField, phoneField, usernameField;
-	@FXML
-	private PasswordField passwordField;
-	@FXML
-	private Label statusLabel;
-	private static RegisterController instance;
 
-	public RegisterController() {
-		instance = this;
-	}
+    @FXML
+    private TextField emailField, phoneField, usernameField;
 
-	public static RegisterController getInstance() {
-		return instance;
-	}
+    @FXML
+    private PasswordField passwordField;
 
-	/**
-	 * Triggered when the user clicks the register button. Validates fields and
-	 * sends a Subscriber object to the server if valid.
-	 */
-	@FXML
-	private void handleRegister() {
+    @FXML
+    private HBox messageContainer;
 
-		String username = usernameField.getText().trim();
-		String password = passwordField.getText().trim();
-		String phone = phoneField.getText().trim();
-		String email = emailField.getText().trim();
+    private static RegisterController instance;
 
-		if (username.isEmpty() || password.isEmpty() || phone.isEmpty() || email.isEmpty()) {
-			showAlert(AlertType.WARNING, "All fields must be filled.");
-			return;
-		}
+    public RegisterController() {
+        instance = this;
+    }
 
-		if (!isValidEmail(email)) {
-			showAlert(AlertType.ERROR, "Invalid email format.");
-			return;
-		}
+    public static RegisterController getInstance() {
+        return instance;
+    }
 
-		if (!isValidPhone(phone)) {
-			showAlert(AlertType.ERROR, "Invalid phone number. Use only digits (10 characters).\nExample: 0501234567");
-			return;
-		}
+    @FXML
+    private void handleRegister() {
+        clearMessage(); // נקה הודעות קודמות
 
-		Subscriber sub = new Subscriber(username, password, phone, email, 0); // id, code מהשרת
-		System.out.println(sub.toString() + " " + (sub instanceof Subscriber));
-		Main.clientConsole.accept(sub);
-		statusLabel.setText("Registration request sent!");
+        String username = usernameField.getText().trim();
+        String password = passwordField.getText().trim();
+        String phone = phoneField.getText().trim();
+        String email = emailField.getText().trim();
 
-	}
+        if (username.isEmpty() || password.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+            showMessage("All fields must be filled.", "error");
+            return;
+        }
 
-	private boolean isValidEmail(String email) {
-		return Pattern.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", email);
-	}
+        if (!isValidEmail(email)) {
+            showMessage("Invalid email format.", "error");
+            return;
+        }
 
-	private boolean isValidPhone(String phone) {
-		return phone.matches("\\d{10}"); // exactly 10 digits
-	}
+        if (!isValidPhone(phone)) {
+            showMessage("Invalid phone number. Must be 10 digits. Example: 0501234567", "error");
+            return;
+        }
 
-	private void showAlert(AlertType type, String message) {
-		Alert alert = new Alert(type);
-		alert.setContentText(message);
-		alert.showAndWait();
-	}
+        Subscriber sub = new Subscriber(username, password, phone, email, 0);
+        Main.clientConsole.accept(sub);
+    }
 
-	@FXML
-	private void handleBack() {
-		Main.goBackToPreviousScene();
-	}
+    private boolean isValidEmail(String email) {
+        return Pattern.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", email);
+    }
 
-	public void handleServerResponse(String message) {
-		statusLabel.setText(message);
-		Alert alert = new Alert(
-				message.startsWith("Registration successful") ? Alert.AlertType.INFORMATION : Alert.AlertType.ERROR,
-				message, ButtonType.OK);
-		alert.showAndWait();
-	}
+    private boolean isValidPhone(String phone) {
+        return phone.matches("\\d{10}");
+    }
 
+    private void showMessage(String text, String type) {
+        messageContainer.getChildren().clear();
+
+        Label msg = new Label(text);
+        msg.setStyle(getStyleForType(type));
+        messageContainer.getChildren().add(msg);
+    }
+
+    private void clearMessage() {
+        messageContainer.getChildren().clear();
+    }
+
+    @FXML
+    private void handleBack() {
+        Main.goBackToPreviousScene();
+    }
+
+    /**
+     * Called when server sends back registration result.
+     */
+    public void handleServerResponse(String message) {
+        clearMessage();
+        if (message.toLowerCase().contains("successful")) {
+            showMessage(message, "success");
+        } else {
+            showMessage(message, "error");
+        }
+    }
+
+    private String getStyleForType(String type) {
+        if ("success".equals(type)) {
+            return "-fx-background-color: rgba(144, 238, 144, 0.4);" +  // light green transparent
+                   "-fx-text-fill: #006400;" +                         // dark green text
+                   "-fx-font-weight: bold;" +
+                   "-fx-padding: 12;" +
+                   "-fx-border-color: #006400;" +
+                   "-fx-border-width: 1;" +
+                   "-fx-background-radius: 6;" +
+                   "-fx-border-radius: 6;";
+        } else { // error
+            return "-fx-background-color: rgba(255, 99, 71, 0.3);" +  // light red transparent
+                   "-fx-text-fill: #990000;" +                        // dark red text
+                   "-fx-font-weight: bold;" +
+                   "-fx-padding: 12;" +
+                   "-fx-border-color: #990000;" +
+                   "-fx-border-width: 1;" +
+                   "-fx-background-radius: 6;" +
+                   "-fx-border-radius: 6;";
+        }
+    }
 }

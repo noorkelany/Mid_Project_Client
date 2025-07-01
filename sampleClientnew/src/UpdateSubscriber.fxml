@@ -9,66 +9,77 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
 
-<BorderPane prefHeight="449.0" prefWidth="662.0" stylesheets="@UpdateSubscriber.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UpdateSubscriberController">
+<BorderPane prefHeight="480.0" prefWidth="620.0"
+	stylesheets="@UpdateSubscriber.css"
+	xmlns="http://javafx.com/javafx/23.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="UpdateSubscriberController">
 
-    <!-- Top Bar -->
-    <top>
-        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
-            <children>
-                <Button fx:id="LogoutButton" onAction="#handleLogout" styleClass="logout-button" text="Logout" />
-                <Label styleClass="main-title" text="Update Details" />
-            </children>
-        </HBox>
-    </top>
+	<!-- Top Bar -->
+	<top>
+		<HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
+			<children>
+				<Button fx:id="btnBack" onAction="#handleBackToMainPage"
+					styleClass="back-button" text="← Back" />
+				<Region HBox.hgrow="ALWAYS" />
+				<Label styleClass="main-title" text="Update Details" />
+				<Region HBox.hgrow="ALWAYS" />
+			</children>
+		</HBox>
+	</top>
 
-    <!-- Side Navigation Bar -->
-    <left>
-        <VBox alignment="TOP_CENTER" prefWidth="180" spacing="10" styleClass="side-panel">
-            <children>
-                <Button styleClass="side-menu-button-selected" text="Update details" />
-                <Button onAction="#handleSubscriberOrders" styleClass="side-menu-button" text="Orders" />
-            </children>
-            <padding><Insets top="40" /></padding>
-        </VBox>
-    </left>
+	<!-- Main Content -->
+	<center>
+		<VBox alignment="TOP_CENTER" spacing="20"
+			style="-fx-padding: 30; -fx-background-color: #dff1ff;">
+			<children>
+				<VBox spacing="5">
+					<children>
+						<Label text="Username:" />
+						<TextField fx:id="usernameField" prefWidth="250" />
+					</children>
+				</VBox>
+				<VBox spacing="6">
+					<children>
+						<Label prefWidth="87.0" text="Password:" />
+						<StackPane alignment="CENTER_RIGHT">
+							<children>
+								<TextField fx:id="visiblePasswordField"
+									managed="false" prefWidth="250" visible="false" />
+								<PasswordField fx:id="passwordField"
+									prefWidth="250" />
+								<Button onAction="#togglePasswordVisibility" text="👁"
+									styleClass="eye-button">
+									<StackPane.margin>
+										<Insets top="0" right="1" bottom="0" left="0" />
+									</StackPane.margin>
+								</Button>									
+							</children>
+						</StackPane>
+					</children>
+				</VBox>
 
-    <!-- Main Content -->
-    <center>
-        <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 30;">
-            <children>
-                <HBox spacing="10">
-                    <children>
-                        <Label prefWidth="86.0" text="Username:" />
-                        <TextField fx:id="usernameField" prefWidth="250" />
-                    </children>
-                </HBox>
-                <HBox spacing="10">
-                    <children>
-                        <Label prefWidth="87.0" text="Password:" />
-                        <StackPane>
-                            <children>
-                                <TextField fx:id="visiblePasswordField" managed="false" prefWidth="250" visible="false" />
-                                <PasswordField fx:id="passwordField" prefWidth="250" />
-                            </children>
-                        </StackPane>
-                        <Button onAction="#togglePasswordVisibility" text="👁" styleClass="eye-button" />
-                    </children>
-                </HBox>
-                <HBox spacing="10">
-                    <children>
-                        <Label prefWidth="89.0" text="Phone Number:" />
-                        <TextField fx:id="phoneField" prefWidth="250" />
-                    </children>
-                </HBox>
-                <HBox spacing="10">
-                    <children>
-                        <Label prefWidth="89.0" text="Email:" />
-                        <TextField fx:id="emailField" prefWidth="250" />
-                    </children>
-                </HBox>
-                <Button alignment="CENTER" onAction="#handleSave" prefHeight="25.0" prefWidth="169.0" text="Save Changes"  styleClass="save-button"/>
-            </children>
-        </VBox>
-    </center>
+
+				<VBox spacing="5">
+					<children>
+						<Label text="Phone Number:" />
+						<TextField fx:id="phoneField" prefWidth="250" />
+					</children>
+				</VBox>
+				<VBox spacing="5">
+					<children>
+						<Label text="Email:" />
+						<TextField fx:id="emailField" prefWidth="250" />
+					</children>
+				</VBox>
+				<Button alignment="CENTER" onAction="#handleSave"
+					prefHeight="40.0" prefWidth="180.0" text="Save Changes"
+					styleClass="save-button" />
+				<Label fx:id="statusMessage" visible="false" wrapText="true"
+					maxWidth="350" style="-fx-alignment: center;" />
+			</children>
+		</VBox>
+	</center>
 </BorderPane>

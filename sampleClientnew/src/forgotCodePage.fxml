@@ -41,8 +41,6 @@
 				<Button fx:id="btnSMS" text="By SMS" onAction="#SendBySMS"
 					styleClass="side-menu-button" />
 			</HBox>
-<Label fx:id="forgotCodeTitle" text="Choose how to get your code"
-		styleClass="form-label" />
 	<Label fx:id="statusLabel" />
 		</VBox>
 	</center>

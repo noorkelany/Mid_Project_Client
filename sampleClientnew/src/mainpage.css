@@ -43,11 +43,26 @@
     -fx-border-color: #b0c4de;
     -fx-border-radius: 6;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.3, 0, 2);
+    -fx-pref-width: 160px;           
+    -fx-wrap-text: true;             
+    -fx-alignment: center;           
+    -fx-text-alignment: center;
 }
 
 .nav-button:hover {
-    -fx-background-color: #a8d0f0;
-    -fx-cursor: hand;
+    -fx-background-color: #003366;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI";
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 10 14;
+    -fx-border-color: #002244;
+    -fx-border-radius: 6;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0.4, 0, 2);
+    -fx-pref-width: 160px;
+    -fx-wrap-text: true;
+    -fx-alignment: center;
 }
 
 .info-box {

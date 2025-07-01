@@ -32,6 +32,15 @@ public class workerController implements Initializable{
     @FXML
     private TableView<Subscriber> subscriberTable;
     
+    private static workerController instance;
+    
+    public static TableView<Subscriber> getSubscriberTable() {
+        return instance.subscriberTable;
+    }
+
+    
+    
+    
 	
     
 	
@@ -49,6 +58,7 @@ public class workerController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		instance = this;
 		codeCol.setCellValueFactory(new PropertyValueFactory<>("code"));
 		usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
 		passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
@@ -98,6 +108,16 @@ public class workerController implements Initializable{
 	        e.printStackTrace();
 	    }
 	}
+	
+	@FXML
+	private void handleRegisterNewSubscriber() {
+	    try {
+	        Main.switchScene("Register.fxml");
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
 
 
 }

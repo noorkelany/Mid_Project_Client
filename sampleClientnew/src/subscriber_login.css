@@ -19,7 +19,8 @@
     -fx-cursor: hand;
 }
 .back-button:hover {
-    -fx-background-color: #1565c0;
+     -fx-background-color: #083b73;  /* צבע כחול כהה */
+    -fx-text-fill: white;
 }
 
 /* Title in the top bar */
@@ -65,11 +66,28 @@
     -fx-cursor: hand;
 }
 .login-button:hover {
-    -fx-background-color: #1565c0;
+    -fx-background-color: #083b73;
 }
 
-/* Error message */
-.error-label {
-    -fx-font-size: 13px;
-    -fx-text-fill: red;
+/* Error message (red with transparency) */
+.error-box {
+    -fx-background-color: rgba(255, 0, 0, 0.2); /* red transparent */
+    -fx-border-color: red !important;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 10;
+    -fx-text-fill: darkred;
+    -fx-font-weight: bold;
 }
+
+/* Success message (green with transparency) */
+.success-box {
+    -fx-background-color: rgba(0, 128, 0, 0.2); /* green transparent */
+    -fx-border-color: green !important;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 10;
+    -fx-text-fill: darkgreen;
+    -fx-font-weight: bold;
+}
+

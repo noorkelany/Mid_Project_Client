@@ -2,9 +2,11 @@ import data.Subscriber;
 import data.SubscriberSession;
 import data.ResponseWrapper;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -18,6 +20,7 @@ public class UpdateSubscriberController implements Initializable {
     @FXML private TextField visiblePasswordField;
     @FXML private TextField phoneField;
     @FXML private TextField emailField;
+    @FXML private Label statusMessage;
 
     private boolean showingPassword = false;
 
@@ -42,13 +45,8 @@ public class UpdateSubscriberController implements Initializable {
                 if (message instanceof ResponseWrapper response && "UpdateSubscriberResult".equals(response.getType())) {
                     boolean success = (boolean) response.getData();
                     Platform.runLater(() -> {
-                        Alert alert = new Alert(success ? Alert.AlertType.INFORMATION : Alert.AlertType.ERROR);
-                        alert.setTitle("Update Status");
-                        alert.setHeaderText(null);
-                        alert.setContentText(success ? "Details updated successfully." : "Failed to update details.");
-                        alert.showAndWait();
-
                         if (success) {
+                            showMessage("✅ Details updated successfully.", "success");
                             Subscriber updated = new Subscriber(
                                     usernameField.getText(),
                                     showingPassword ? visiblePasswordField.getText() : passwordField.getText(),
@@ -57,6 +55,8 @@ public class UpdateSubscriberController implements Initializable {
                                     SubscriberSession.getSubscriber().getCode()
                             );
                             SubscriberSession.setSubscriber(updated);
+                        } else {
+                            showMessage("❌ Failed to update details.", "error");
                         }
                     });
                 }
@@ -90,19 +90,64 @@ public class UpdateSubscriberController implements Initializable {
         String phone = phoneField.getText();
         String email = emailField.getText();
 
+        if (username.isEmpty() || password.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+            showMessage("❌ Please fill in all fields.", "error");
+            return;
+        }
+
         Subscriber updated = new Subscriber(username, password, phone, email, SubscriberSession.getSubscriber().getCode());
         Main.clientConsole.accept(new ResponseWrapper("UpdateSubscriber", updated));
     }
-
+    
     @FXML
-    private void handleLogout() {
-        try {
-        	SubscriberSession.setSubscriber(null);
-            Main.switchScene("MainPage.fxml");
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void showMessage(String text, String type) {
+        statusMessage.setText(text);
+        statusMessage.setVisible(true);
+        statusMessage.setStyle("");
+
+        switch (type) {
+            case "success" -> statusMessage.setStyle(
+                    "-fx-background-color: #d4edda; " +
+                    "-fx-text-fill: green; " +
+                    "-fx-font-weight: bold; " +
+                    "-fx-padding: 8; " +
+                    "-fx-background-radius: 6;"
+            );
+            case "error" -> statusMessage.setStyle(
+                    "-fx-background-color: #f8d7da; " +
+                    "-fx-text-fill: darkred; " +
+                    "-fx-font-weight: bold; " +
+                    "-fx-padding: 8; " +
+                    "-fx-background-radius: 6;"
+            );
+            default -> statusMessage.setStyle(
+                    "-fx-background-color: #e2e3e5; " +
+                    "-fx-text-fill: black; " +
+                    "-fx-font-weight: normal; " +
+                    "-fx-padding: 8; " +
+                    "-fx-background-radius: 6;"
+            );
         }
     }
+
+
+    public void handleBackToMainPage(ActionEvent event) {
+		try {
+		/*// Load the previous FXML
+		Parent previousRoot = FXMLLoader.load(getClass().getResource("SubscriberMain.fxml"));
+
+		// Get current stage from any control (e.g. the button)
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		// Replace the scene in the same window
+		stage.setScene(new Scene(previousRoot));*/
+			Main.switchScene("SubscriberMain.fxml");
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+
+	}
     
     @FXML
     private void handleSubscriberOrders() {

@@ -8,7 +8,7 @@
 }
 
 .top-bar-title {
-    -fx-font-size: 22px;
+    -fx-font-size: 30px;
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
@@ -40,17 +40,20 @@
     -fx-cursor: hand;
 }
 .primary-button:hover {
-    -fx-background-color: #1565c0;
+    -fx-background-color: #083b73;
 }
 
 .forgot-button {
-    -fx-font-size: 13px;
-    -fx-text-fill: #1565c0;
+    -fx-font-size: 15px;
+    -fx-text-fill: #0090ff;
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-underline: true;
     -fx-cursor: hand;
     -fx-padding: 4;
+}
+.forgot-button:hover {
+	    -fx-text-fill:  #083b73;        
 }
 
 .back-button {
@@ -59,6 +62,10 @@
     -fx-font-weight: bold;
     -fx-background-radius: 8;
     -fx-padding: 6 12;
+}
+.back-button:hover {
+    -fx-background-color: #083b73;  /* צבע כחול כהה */
+    -fx-text-fill: white;
 }
 
 .message-box {

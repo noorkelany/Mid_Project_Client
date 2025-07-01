@@ -4,45 +4,48 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
-	fx:controller="UpdateOrderController" prefWidth="500" prefHeight="320"
-	stylesheets="@updateorder.css">
+	fx:controller="UpdateOrderController" prefWidth="550" prefHeight="450"
+	stylesheets="@updated.css">
+
 	<children>
-		<VBox spacing="15" AnchorPane.topAnchor="20"
-			AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
-			<HBox alignment="CENTER">
-				<Label text="Orders Page" styleClass="page-title" />
-			</HBox>
 
-	<GridPane hgap="10" vgap="15">
-				<columnConstraints>
-					<ColumnConstraints halignment="RIGHT" />
-					<ColumnConstraints hgrow="ALWAYS" />
-				</columnConstraints>
+		<BorderPane styleClass="top-bar" AnchorPane.topAnchor="0"
+			AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+			<left>
+				<Button text="← Back" onAction="#goBack"
+					styleClass="back-button" />
+			</left>
+			<center>
+				<Label text="Update Order" styleClass="main-title" />
+			</center>
+		</BorderPane>
 
-				<Label text="Order number:" GridPane.rowIndex="0"
-					GridPane.columnIndex="0" styleClass="form-label" />
-				<TextField fx:id="orderNumberField" GridPane.rowIndex="0"
-					GridPane.columnIndex="1" styleClass="green-field" editable="false"/>
 
-				<Label text="Parking Space:" GridPane.rowIndex="1"
-					GridPane.columnIndex="0" styleClass="form-label" />
-				<TextField fx:id="parkingSpaceField" GridPane.rowIndex="1"
-					GridPane.columnIndex="1" styleClass="green-field" />
+		<VBox spacing="15" alignment="TOP_LEFT"
+			styleClass="form-container" AnchorPane.topAnchor="60"
+			AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
 
-				<Label text="Order date:" GridPane.rowIndex="2"
-					GridPane.columnIndex="0" styleClass="form-label" />
-				<DatePicker fx:id="datePicker" GridPane.rowIndex="2"
-					GridPane.columnIndex="1" styleClass="green-field" />
-			</GridPane>
+			<Label text="Order number:" styleClass="form-label" />
+			<TextField fx:id="orderNumberField" editable="false"
+				styleClass="green-field" />
 
-			<HBox spacing="10" alignment="CENTER">
+			<Label text="Parking Space:" styleClass="form-label" />
+			<TextField fx:id="parkingSpaceField"
+				styleClass="green-field" />
+
+			<Label text="Order date:" styleClass="form-label" />
+			<DatePicker fx:id="datePicker" styleClass="green-field" prefHeight="35.0" />
+
+
+			<HBox spacing="15" alignment="CENTER">
 				<Button text="Update" onAction="#handleUpdate"
 					styleClass="update-button" />
-				<Button text="Back" onAction="#goBack"
-					styleClass="back-button" />
 			</HBox>
 
-			<Label fx:id="statusLabel" />
+			<Label fx:id="statusLabel" visible="false" maxWidth="400"
+				wrapText="true" alignment="CENTER_LEFT" />
 		</VBox>
+
+
 	</children>
 </AnchorPane>

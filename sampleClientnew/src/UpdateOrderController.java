@@ -1,4 +1,3 @@
-
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -47,20 +46,13 @@ public class UpdateOrderController {
 		// Set default date
 		datePicker.setValue(LocalDate.now());
 
-		// Override ClientConsole to capture server response
+		// ClientConsole override to show status messages
 		Main.clientConsole = new ClientConsole(Main.serverIP, 5555) {
 			@Override
 			public void display(Object message) {
 				Platform.runLater(() -> {
 					if (message instanceof String str) {
-						statusLabel.setText(str);
-						if (str.toLowerCase().contains("invalid")) {
-							statusLabel.setStyle("-fx-text-fill: red;");
-						} else if (str.toLowerCase().contains("success")) {
-							statusLabel.setStyle("-fx-text-fill: green;");
-						} else {
-							statusLabel.setStyle("-fx-text-fill: black;");
-						}
+						showStatusMessage(str);
 					}
 				});
 			}
@@ -80,27 +72,54 @@ public class UpdateOrderController {
 
 	public void handleUpdate() {
 		try {
-			int orderNumber = Integer.parseInt(orderNumberField.getText().trim());
-			int parkingSpace = Integer.parseInt(parkingSpaceField.getText().trim());
+			String orderStr = orderNumberField.getText().trim();
+			String spaceStr = parkingSpaceField.getText().trim();
 			LocalDate localDate = datePicker.getValue();
 
-			if (localDate == null) {
-				statusLabel.setText("Please select a date.");
-				statusLabel.setStyle("-fx-text-fill: red;");
+			if (orderStr.isEmpty() || spaceStr.isEmpty() || localDate == null) {
+				showStatusMessage("All fields must be filled.");
 				return;
 			}
 
+			int orderNumber = Integer.parseInt(orderStr);
+			int parkingSpace = Integer.parseInt(spaceStr);
 			Date sqlDate = Date.valueOf(localDate);
+
 			UpdateOrderDetails update = new UpdateOrderDetails(orderNumber, parkingSpace, sqlDate);
 			Main.clientConsole.accept(update);
+
 		} catch (NumberFormatException e) {
-			statusLabel.setText("Invalid number format.");
-			statusLabel.setStyle("-fx-text-fill: red;");
+			showStatusMessage("Invalid number format.");
 		} catch (Exception e) {
-			statusLabel.setText("Error: " + e.getMessage());
-			statusLabel.setStyle("-fx-text-fill: red;");
+			showStatusMessage("Error: " + e.getMessage());
 		}
 	}
+
+	private void showStatusMessage(String message) {
+		statusLabel.setVisible(true);
+		statusLabel.setText(message);
+
+		if (message.toLowerCase().contains("success")) {
+			statusLabel.setStyle(
+				"-fx-text-fill: green;" +
+				"-fx-background-color: #d4edda;" +
+				"-fx-padding: 10;" +
+				"-fx-border-radius: 6;" +
+				"-fx-background-radius: 6;" +
+				"-fx-border-color: green;"
+			);
+		} else {
+			statusLabel.setStyle(
+				"-fx-text-fill: red;" +
+				"-fx-background-color: #f8d7da;" +
+				"-fx-padding: 10;" +
+				"-fx-border-radius: 6;" +
+				"-fx-background-radius: 6;" +
+				"-fx-border-color: red;"
+			);
+		}
+	}
+
 
 	@FXML
 	public void goBack() {
@@ -109,6 +128,4 @@ public class UpdateOrderController {
 		currentStage.setTitle("Order Lookup");
 		currentStage.show();
 	}
-
-
 }

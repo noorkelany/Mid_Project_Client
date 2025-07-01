@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
@@ -10,7 +9,6 @@
             stylesheets="@subscriber_login.css"
             prefHeight="450.0" prefWidth="420.0">
 
-    <!-- Top bar with back button and centered title -->
     <top>
         <HBox spacing="10" alignment="CENTER_LEFT" styleClass="back-bar">
             <children>
@@ -22,23 +20,19 @@
         </HBox>
     </top>
 
-    <!-- Center content -->
     <center>
         <VBox alignment="TOP_CENTER" spacing="25">
             <padding>
                 <Insets top="30" right="40" bottom="30" left="40"/>
             </padding>
 
-            <!-- Form Fields -->
             <GridPane hgap="15" vgap="15" alignment="CENTER" maxWidth="Infinity">
                 <Label text="Username" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <TextField fx:id="usernameField"
-                           promptText="Enter username"
+                <TextField fx:id="usernameField" promptText="Enter username"
                            GridPane.rowIndex="1" GridPane.columnIndex="0"
                            GridPane.columnSpan="2" styleClass="text-field"/>
 
                 <Label text="Password" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-
                 <StackPane GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2">
                     <PasswordField fx:id="passwordField" promptText="Enter password"/>
                     <TextField fx:id="visiblePasswordField" visible="false" managed="false"/>
@@ -52,15 +46,17 @@
                     </graphic>
                 </Button>
 
-                <Label fx:id="errorLabel"
-                       GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2"
-                       styleClass="error-label"/>
-
-                <!-- Login Button -->
                 <Button text="Login" onAction="#handleLogin"
                         styleClass="login-button"
-                        GridPane.rowIndex="5" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                        GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2"
                         maxWidth="200"/>
+
+                <VBox fx:id="messageBox"
+                      GridPane.rowIndex="5" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                      visible="false" managed="false"
+                      style="-fx-padding: 10; -fx-background-radius: 8; -fx-border-radius: 8;">
+                    <Label fx:id="messageLabel" wrapText="true" style="-fx-text-fill: white;" />
+                </VBox>
             </GridPane>
         </VBox>
     </center>

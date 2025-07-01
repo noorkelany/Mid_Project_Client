@@ -1,3 +1,9 @@
+
+.root {
+    -fx-background-color: #dff1ff; 
+}
+
+
 /* ===================== */
 /*       Top Bar         */
 /* ===================== */
@@ -92,18 +98,35 @@
 
 /* רקע של כותרת הטבלה */
 .table-view .column-header-background {
-    -fx-background-color: #d0e6f7;
+    -fx-background-color: transparent;
 }
 
-/* טקסט של כותרות */
+/* כותרת */
+.table-view .column-header {
+    -fx-background-color: #d0e6f7;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+}
+
+/* טקסט בכותרות */
 .table-view .column-header .label {
-    -fx-font-weight: bold;
     -fx-text-fill: #003366;
+    -fx-font-weight: bold;
     -fx-font-size: 13px;
     -fx-alignment: center;
 }
 
-/* יישור תוכן בעמודות */
-.table-view .table-column {
-    -fx-alignment: center;
+/* תאים של תוכן */
+.table-view .table-cell {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+}
+
+/* מסגרת כללית */
+.table-view {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
 }

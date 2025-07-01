@@ -1,54 +1,60 @@
-/* Base layout */
 .root {
-    -fx-background-color: #f9f9f9;
-    -fx-padding: 40;
+    -fx-background-color: #dff1ff;
     -fx-font-family: "Segoe UI", sans-serif;
 }
 
-/* Page title */
-.page-title {
-    -fx-background-color: #AFE1AF;
-    -fx-text-fill: black;
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
+/* 🔵 Top Bar */
+.top-bar {
+    -fx-background-color: #1e3a74;
     -fx-padding: 12 20;
-    -fx-background-radius: 8px;
-    -fx-border-radius: 8px;
-    -fx-border-color: #2e7d32;
-    -fx-border-width: 2;
 }
 
-/* Input field */
+.main-title {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+/* 🟢 Page Title */
+.page-title {
+    -fx-text-fill: #003366;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* 🟢 Label Above Input */
+.input-label {
+    -fx-text-fill: #003366;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+/* 🟢 IP Input Field */
 .input-field {
     -fx-border-color: #4CAF50;
     -fx-border-width: 2;
-    -fx-border-radius: 5px;
-    -fx-padding: 8 12;
-    -fx-font-size: 14px;
-    -fx-background-radius: 5px;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
     -fx-background-color: white;
     -fx-prompt-text-fill: #888;
+    -fx-font-size: 14px;
+    -fx-padding: 8 10;
 }
 
-/* Connect button */
-.nav-button {
-    -fx-background-color: #add8e6;
-    -fx-text-fill: black;
-    -fx-font-size: 14px;
+/* 🔵 Connect Button (like Back button) */
+.back-button {
+    -fx-background-color: #1976d2;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-padding: 10 16;
-    -fx-background-radius: 6px;
-    -fx-border-color: #5e7a89;
-    -fx-border-width: 1;
-    -fx-border-radius: 6px;
-    -fx-cursor: hand;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+}
+.back-button:hover {
+    -fx-background-color: #0d47a1;
 }
 
-.nav-button:hover {
-    -fx-background-color: #9ccfe0;
-}
-
-/* Error message box */
+/* ❌ Error Message */
 .error-box {
     -fx-text-fill: red;
     -fx-font-weight: bold;
@@ -58,9 +64,3 @@
     -fx-background-radius: 5;
     -fx-background-color: transparent;
 }
-
-.error-box .content {
-    -fx-background-color: transparent;
-}
-
-

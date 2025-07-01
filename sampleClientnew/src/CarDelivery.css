@@ -16,7 +16,7 @@
 .label {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-text-fill: black;
+    -fx-text-fill: #003366;
 }
 
 /* Text fields */
@@ -43,10 +43,11 @@
 }
 
 .button:hover {
-    -fx-background-color: #388e3c;
+    -fx-background-color: #083b73;  /* צבע כחול כהה */
+    -fx-text-fill: white;
 }
 .conCodelabel:hover {
-	    -fx-text-fill: #e3f2fd;        /* Optional lighter text on hover */
+	    -fx-text-fill: #0090ff;        /* Optional lighter text on hover */
 }
 /* Back button in top bar */
 .back-button {
@@ -56,6 +57,11 @@
     -fx-background-radius: 6;
     -fx-padding: 6 14;
     -fx-cursor: hand;
+}
+
+.back-button:hover {
+    -fx-background-color: #083b73;  /* צבע כחול כהה */
+    -fx-text-fill: white;
 }
 /* slightly transparent on hover */
 .conCodelabel:hover {

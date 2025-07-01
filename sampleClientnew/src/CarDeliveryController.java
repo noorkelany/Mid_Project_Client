@@ -173,17 +173,11 @@ public class CarDeliveryController {
     
     @FXML
     public void handleBackToMainPage(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("BPARK Dashboard");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close(); // סגירת החלון הנוכחי
+
     }
+
 }
 
 

@@ -24,19 +24,19 @@
 
     <!-- Main content -->
     <center>
-        <VBox alignment="TOP_LEFT" spacing="16" style="-fx-padding: 40 40 40 40;">
+        <VBox alignment="TOP_LEFT" spacing="16" style="-fx-padding: 40 40 40 40; -fx-background-color: #dff1ff;">
             <children>
-                <Label text="Enter Confirmation Code" styleClass="form-title"/>
+                <Label text="Confirmation Code" styleClass="form-title"/>
                 <HBox spacing="10">
                     <children>
-                        <TextField fx:id="parkingCodetxt" promptText="Confirmation Code"
+                        <TextField fx:id="parkingCodetxt" promptText="Enter Code"
                                    styleClass="green-field" />
                         <Button fx:id="btnSend" text="Get The Car" onAction="#Send"
                                 styleClass="primary-button"/>
                     </children>
                 </HBox>
 
-                <Button fx:id="btnForgotCode" text="Forgot Code?" onAction="#ForgotCode"
+                <Button fx:id="btnForgotCode" text="Forgot Code?" textFill="#0090ff" onAction="#ForgotCode"
                         styleClass="forgot-button"/>
 
                 <Label fx:id="forgotCodeLabel" visible="false" wrapText="true" maxWidth="360"

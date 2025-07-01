@@ -17,7 +17,7 @@
 /*     Back Button       */
 /* ===================== */
 .back-button {
-    -fx-background-color: #1976d2;
+    -fx-background-color: #1e88e5;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-padding: 6 14;
@@ -25,7 +25,7 @@
     -fx-cursor: hand;
 }
 .back-button:hover {
-    -fx-background-color: #0d47a1;
+    -fx-background-color: #083b73;
 }
 
 
@@ -37,7 +37,7 @@
     -fx-pref-height: 60px;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-background-color: #d0eaff;
+    -fx-background-color: #1e88e5;
     -fx-background-radius: 20; /* פינות מעוגלות */
     -fx-border-radius: 20;
     -fx-border-color: #a0c0e0;
@@ -47,8 +47,8 @@
 }
 
 .side-menu-button:hover {
-    -fx-background-color: #a8d0f0;
-    -fx-text-fill: #003366;
+    -fx-background-color: #083b73;
+    -fx-text-fill: white;
     -fx-cursor: hand;
 }
 
