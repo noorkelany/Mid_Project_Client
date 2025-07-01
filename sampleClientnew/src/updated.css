@@ -1,0 +1,70 @@
+/* Background color for the form area */
+AnchorPane {
+    -fx-background-color: #dff1ff;
+}
+
+/* Top title bar */
+.top-bar {
+    -fx-background-color: #153e75;
+    -fx-padding: 12 20;
+}
+
+.main-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* Form layout spacing */
+.form-container {
+    -fx-padding: 30 40 20 40;
+}
+
+/* Labels */
+.form-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: black;
+}
+
+/* Input fields */
+.green-field {
+    -fx-background-color: white;
+    -fx-border-color: #4caf50;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 6 10;
+    -fx-font-size: 13px;
+}
+
+/* Update Button */
+.update-button {
+    -fx-background-color: #2196f3;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 6 18;
+    -fx-background-radius: 6;
+}
+.update-button:hover {
+    -fx-background-color: #1565c0;
+}
+
+/* Back button in top bar */
+.back-button {
+    -fx-background-color: #1976d2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 6 14;
+    -fx-background-radius: 6;
+}
+
+.back-button:hover {
+    -fx-background-color: #0d47a1;
+}
+
+/* Status message */
+.status-label {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+    -fx-padding: 10 0 0 0;
+}

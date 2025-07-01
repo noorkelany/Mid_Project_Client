@@ -1,0 +1,63 @@
+
+.root {
+    -fx-background-color: #dff1ff; 
+}
+
+.top-bar {
+	-fx-background-color: #1e3a74;
+	    -fx-padding: 12 20;
+}
+
+.main-title {
+	-fx-font-size: 24px;
+	    -fx-text-fill: white;
+	    -fx-font-weight: bold;
+}
+
+.back-button {
+	-fx-background-color: #1e88e5;
+	    -fx-text-fill: white;
+	    -fx-font-weight: bold;
+	    -fx-font-size: 14px;
+	    -fx-background-radius: 8;
+	    -fx-padding: 10 24;
+	    -fx-cursor: hand;
+}
+
+.back-button:hover {
+	-fx-background-color: #083b73;  /* צבע כחול כהה */
+	    -fx-text-fill: white;
+}
+
+.form-label {
+    -fx-text-fill: #003366;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.text-field, .password-field {
+    -fx-pref-width: 320px;
+    -fx-background-radius: 6px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 6px;
+    -fx-padding: 8 12;
+    -fx-font-size: 13px;
+}
+
+.register-button {
+	-fx-background-color: #1e88e5;
+		    -fx-text-fill: white;
+		    -fx-font-weight: bold;
+		    -fx-font-size: 14px;
+		    -fx-background-radius: 8;
+		    -fx-padding: 10 24;
+		    -fx-cursor: hand;
+}
+
+.register-button:hover {
+	-fx-background-color: #083b73;  /* צבע כחול כהה */
+		    -fx-text-fill: white;
+}
+
+
+
