@@ -37,6 +37,15 @@ public class parkingActiveDetailsOnManagerController extends parkingActiveDetail
 		}
 	}
 
+	@FXML
+	public void handleLogout() {
+		try {
+			Main.switchScene("MainPage.fxml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	@FXML
 	void subscriberDetailsBtn(ActionEvent event) {
