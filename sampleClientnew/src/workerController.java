@@ -35,14 +35,7 @@ public class workerController implements Initializable{
 	
     
 	
-    @FXML
-    void parkingActiveDetailsBtn(ActionEvent event) {
-    	try {
-			Main.switchScene("parkingActiveDetails.fxml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-    }
+ 
 
 
 
@@ -80,7 +73,14 @@ public class workerController implements Initializable{
 		ResponseWrapper subscriberResponse = new ResponseWrapper("subscriberList", null);
 		Main.clientConsole.accept(subscriberResponse);
 	}
-	
+	   @FXML
+	    void parkingActiveDetailsBtn(ActionEvent event) {
+	    	try {
+				Main.switchScene("parkingActiveDetails.fxml");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }
 	@FXML
 	private void handleBack() {
 	    try {

@@ -80,7 +80,7 @@ public class ShowOrdersController {
 	 */
 	public void goBack() {
 		try {
-			mainApp.switchScene("MainPage.fxml");
+			Main.switchScene("workerHomePage.fxml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -88,7 +88,7 @@ public class ShowOrdersController {
 	
 	public void updateOrder() {
 		try {
-			mainApp.switchScene("UpdateOrder.fxml");
+			Main.switchScene("UpdateOrder.fxml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

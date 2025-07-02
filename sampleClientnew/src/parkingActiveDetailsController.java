@@ -21,40 +21,40 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class parkingActiveDetailsController implements Initializable {
-	
-    @FXML
-    private TableColumn<Order, String> carNumberCol;
 
-    @FXML
-    private TableColumn<Order, Integer> confCodeCol;
+	@FXML
+	private TableColumn<Order, String> carNumberCol;
 
-    @FXML
-    private TableColumn<Order, Time> delTimeCol;
+	@FXML
+	private TableColumn<Order, Integer> confCodeCol;
 
-    @FXML
-    private TableColumn<Order, Time> recTimeCol;
+	@FXML
+	private TableColumn<Order, Time> delTimeCol;
 
-    @FXML
-    private TableColumn<Order, Integer> subscriberCodeCol;
-    @FXML
-    private TableColumn<Order, Integer> parkingSpaceCol;
-    @FXML
-    private TableView<Order> parkingTable;
-    
-    @Override
+	@FXML
+	private TableColumn<Order, Time> recTimeCol;
+
+	@FXML
+	private TableColumn<Order, Integer> subscriberCodeCol;
+	@FXML
+	private TableColumn<Order, Integer> parkingSpaceCol;
+	@FXML
+	private TableView<Order> parkingTable;
+
+	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-    	carNumberCol.setCellValueFactory(new PropertyValueFactory<>("carNumber"));
-    	confCodeCol.setCellValueFactory(new PropertyValueFactory<>("confirmation_code"));
-    	delTimeCol.setCellValueFactory(new PropertyValueFactory<>("delTime"));
-    	recTimeCol.setCellValueFactory(new PropertyValueFactory<>("recTime"));
-    
-    	subscriberCodeCol.setCellValueFactory(new PropertyValueFactory<>("subscriber_id"));
-    	parkingSpaceCol.setCellValueFactory(new PropertyValueFactory<>("parking_space"));
+		carNumberCol.setCellValueFactory(new PropertyValueFactory<>("carNumber"));
+		confCodeCol.setCellValueFactory(new PropertyValueFactory<>("confirmation_code"));
+		delTimeCol.setCellValueFactory(new PropertyValueFactory<>("delTime"));
+		recTimeCol.setCellValueFactory(new PropertyValueFactory<>("recTime"));
 
-    	parkingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    	parkingTable.setEditable(false);
-    	parkingTable.setFocusTraversable(false);
-		
+		subscriberCodeCol.setCellValueFactory(new PropertyValueFactory<>("subscriber_id"));
+		parkingSpaceCol.setCellValueFactory(new PropertyValueFactory<>("parking_space"));
+
+		parkingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		parkingTable.setEditable(false);
+		parkingTable.setFocusTraversable(false);
+
 		Main.clientConsole = new ClientConsole(Main.serverIP, 5555) {
 			@Override
 			public void display(Object message) {
@@ -66,7 +66,7 @@ public class parkingActiveDetailsController implements Initializable {
 						System.out.print(orderList.get(0).getDelTime());
 						for (Object o : orderList) {
 							data.add((Order) o);
-					
+
 						}
 						parkingTable.setItems(data);
 					}
@@ -76,31 +76,45 @@ public class parkingActiveDetailsController implements Initializable {
 				}
 			}
 		};
-		
+
 		ResponseWrapper parkingSubscriberResponse = new ResponseWrapper("parkingActiveList", null);
 		Main.clientConsole.accept(parkingSubscriberResponse);
 	}
-    
-    @FXML
-    void subscriberDetailsBtn(ActionEvent event) {
-    	try {
+
+	@FXML
+	void subscriberDetailsBtn(ActionEvent event) {
+		try {
 			Main.switchScene("workerHomePage.fxml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    }
-    
-    @FXML
-    private void handleBack() {
-        try {
-            Main.switchScene("workerHomePage.fxml"); 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	}
 
-    
+	@FXML
+	private void showOrdersBtn() {
+		try {
+			Main.switchScene("ShowOrder.fxml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
+	@FXML
+	public void RegisterNewSubscriber() {
+		try {
+			Main.switchScene("Register.fxml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
+	@FXML
+	private void handleBack() {
+		try {
+			Main.switchScene("workerHomePage.fxml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
