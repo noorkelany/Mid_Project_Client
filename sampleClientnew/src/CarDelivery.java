@@ -51,7 +51,7 @@ public class CarDelivery implements Initializable {
 	private Order order1 = null; 
 	/**
 	 * this function set the current order
-	 * @param order
+	 * @param order new value for order
 	 */
 	public void setOrder(Order order) {
 		//this.parkingCode = order.getParking_space();
@@ -59,8 +59,8 @@ public class CarDelivery implements Initializable {
 	}
 	/**
 	 * this function for the subscribers want to delivery his car
-	 * @param order
-	 * @param sub
+	 * @param order new value for order
+	 * @param sub new value for subscriber
 	 */
 	public void setOrderWithCode(Order order,Subscriber sub) {
 		order1 = order;
@@ -68,7 +68,7 @@ public class CarDelivery implements Initializable {
 	}
 	/**
 	 * this function for generate the confirmation code
-	 * @param parkingCode
+	 * @param parkingCode value of parkingcode 
 	 * @return
 	 */
 	public static int generateConfirmationCode(int parkingCode) {
@@ -76,7 +76,7 @@ public class CarDelivery implements Initializable {
 	}
 	/**
 	 * this function to show alert message
-	 * @param msg
+	 * @param msg what message to show
 	 */
 	public void alert(String msg) {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -86,7 +86,7 @@ public class CarDelivery implements Initializable {
 		alert.showAndWait();
 	}
 	/**
-	 * 
+	 * Method to activate delivery button
 	 * @param event this function when the subscriber press to delivery button it
 	 *              will send request to server with order details
 	 */
@@ -180,8 +180,7 @@ public class CarDelivery implements Initializable {
 	/**
 	 * this function -> back to main page
 	 * 
-	 * @param event
-	 * @throws Exception
+	 * @param event button clicked event
 	 */
 	@FXML
 	public void handleBackToMainPage(ActionEvent event) {

@@ -22,29 +22,63 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+/**
+ * Class to control the login process, redirect to the right page
+ */
 public class LoginController {
+	/**
+	 * The text field for entering the username.
+	 */
 	@FXML
 	private TextField usernameField;
 
+	/**
+	 * The password field for secure password input (hidden characters).
+	 */
 	@FXML
 	private PasswordField passwordField;
 
+	/**
+	 * The visible password field for showing the password in plain text.
+	 */
 	@FXML
 	private TextField visiblePasswordField;
 
+	/**
+	 * The eye icon used to toggle password visibility.
+	 */
 	@FXML
 	private ImageView eyeIcon;
 
+	/**
+	 * Label used to display error messages to the user.
+	 */
 	@FXML
 	private Label errorLabel;
-	private static Label errorLabelStatic;
-
-	private Image eyeOpen;
-	private Image eyeClosed;
-	private boolean showingPassword = false;
 
 	/**
-	 * 
+	 * Static reference to the error label used in inner classes or callbacks.
+	 */
+	private static Label errorLabelStatic;
+
+	/**
+	 * The image shown when the password is visible (eye open).
+	 */
+	private Image eyeOpen;
+
+	/**
+	 * The image shown when the password is hidden (eye closed).
+	 */
+	private Image eyeClosed;
+
+	/**
+	 * Boolean flag indicating whether the password is currently visible.
+	 */
+	private boolean showingPassword = false;
+
+
+	/**
+	 * Initializes the controller, sets up the eye icon and handles the response from the server
 	 */
 	@FXML
 	public void initialize() {
@@ -99,6 +133,9 @@ public class LoginController {
 				});
 			}
 
+			/**
+			 * Method to display error message
+			 */
 			private void showLoginError() {
 				System.out.println("❌ Invalid username or password.");
 				if (errorLabelStatic != null) {
@@ -160,6 +197,9 @@ public class LoginController {
 		}
 	}
 
+	/**
+	 * method to switch to QR code page
+	 */
 	@FXML
 	private void handleQRLoginLink() {
 		try {
@@ -169,6 +209,10 @@ public class LoginController {
 		}
 	}
 
+	/**
+	 * Method to switch to main page
+	 * @param event login button clicked
+	 */
 	@FXML
 	private void handleBack(ActionEvent event) {
 		try {

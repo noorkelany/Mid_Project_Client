@@ -9,63 +9,71 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 
+/**
+ * Controller responsible for handling subscriber login via QR code.
+ * This simulates QR scanning by entering a subscriber code manually.
+ * If the code is valid, the user is logged in and redirected to the main subscriber view.
+ */
 public class QRCodeLoginController {
 
-	@FXML
-	private TextField codeField;
+    /**
+     * TextField where the subscriber enters the code (simulated QR content).
+     */
+    @FXML
+    private TextField codeField;
 
-	@FXML
-	private Label statusLabel;
+    /**
+     * Label for displaying login status messages (e.g., success, invalid code).
+     */
+    @FXML
+    private Label statusLabel;
 
-	/**
-	 * Handles the login process based on the entered code. Simulates scanning a QR
-	 * code that contains the subscriber code.
-	 */
-	// save the sent subscriber and move to the subscriberMain
-	@FXML
-	public void initialize() {
-		Main.clientConsole = new ClientConsole(Main.serverIP, 5555) {
-			@Override
-			public void display(Object message) {
-				Platform.runLater(() -> {
-					if (message instanceof Subscriber sub) {
-						SubscriberSession.setSubscriber(sub);
-						try {
-							Main.switchScene("SubscriberMain.fxml");
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		};
-	}
+    /**
+     * Initializes the controller and sets up the client listener.
+     * When a valid Subscriber object is received from the server, the session is updated
+     * and the scene is switched to the subscriber's main page.
+     */
+    @FXML
+    public void initialize() {
+        Main.clientConsole = new ClientConsole(Main.serverIP, 5555) {
+            @Override
+            public void display(Object message) {
+                Platform.runLater(() -> {
+                    if (message instanceof Subscriber sub) {
+                        SubscriberSession.setSubscriber(sub);
+                        try {
+                            Main.switchScene("SubscriberMain.fxml");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        };
+    }
 
-	@FXML
-	private void handleLogin() {
-		String code = codeField.getText().trim();
+    /**
+     * Handles the login button click.
+     * Sends a request to the server to validate the entered subscriber code.
+     * If valid, the server will respond with a Subscriber object (handled in {@code initialize()}).
+     */
+    @FXML
+    private void handleLogin() {
+        String code = codeField.getText().trim();
 
-		if (code.isEmpty()) {
-			statusLabel.setText("Please enter a code.");
-			return;
-		}
+        if (code.isEmpty()) {
+            statusLabel.setText("Please enter a code.");
+            return;
+        }
 
-		// Replace with your actual validation logic:
-		try {
-			// LoginController loginCtrl = new LoginController();
-			// Subscriber subscriber = loginCtrl.getSubscriberByCode(code);
-			ResponseWrapper rsp = new ResponseWrapper("VALIDATE_SUBSCRIBER_CODE", Integer.parseInt(code));
-			Main.clientConsole.accept(rsp);
-			/*
-			 * if (subscriber != null) { SubscriberSession.setSubscriber(subscriber); //
-			 * Save to session statusLabel.setText("Login successful!");
-			 * 
-			 * 
-			 * } else { statusLabel.setText("Invalid code. Try again."); }
-			 */
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+        try {
+            int parsedCode = Integer.parseInt(code);
+            ResponseWrapper rsp = new ResponseWrapper("VALIDATE_SUBSCRIBER_CODE", parsedCode);
+            Main.clientConsole.accept(rsp);
+        } catch (NumberFormatException e) {
+            statusLabel.setText("Code must be numeric.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

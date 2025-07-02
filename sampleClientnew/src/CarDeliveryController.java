@@ -160,6 +160,9 @@ public class CarDeliveryController {
 		}
 	}
 
+	/**method to switch to CarDeliveryWithCode page 
+	 * @param event click on link to insert confirmation code
+	 */
 	@FXML
 	void confCode(MouseEvent event) {
 		try {
@@ -175,20 +178,16 @@ public class CarDeliveryController {
 		}
 	}
 
+	/**
+	 * Method to return to the main page
+	 * @param event button clicked event
+	 */
 	@FXML
 	public void handleBackToMainPage(ActionEvent event) {
-
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
-//            Parent root = loader.load();
-//            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-//            stage.setScene(new Scene(root));
-//            stage.setTitle("BPARK Dashboard");
-//            stage.show();
 		try {
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			stage.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

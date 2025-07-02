@@ -15,16 +15,34 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for updating subscriber details such as username, password, phone, and email.
+ * Handles server communication, input management, and navigation within the subscriber interface.
+ */
 public class UpdateSubscriberController implements Initializable {
 
+    /** TextField for subscriber's username */
     @FXML private TextField usernameField;
+
+    /** PasswordField for hidden password input */
     @FXML private PasswordField passwordField;
+
+    /** TextField for visible password input (used when toggled) */
     @FXML private TextField visiblePasswordField;
+
+    /** TextField for subscriber's phone number */
     @FXML private TextField phoneField;
+
+    /** TextField for subscriber's email address */
     @FXML private TextField emailField;
 
+    /** Tracks whether the password is currently visible */
     private boolean showingPassword = false;
 
+    /**
+     * Initializes the controller by populating form fields with current subscriber data,
+     * and setting up the server response listener for update results.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Subscriber sub = SubscriberSession.getSubscriber();
@@ -39,7 +57,6 @@ public class UpdateSubscriberController implements Initializable {
         visiblePasswordField.setVisible(false);
         visiblePasswordField.setManaged(false);
 
-        // האזנה לתגובה מהשרת
         Main.clientConsole = new ClientConsole(Main.serverIP, 5555) {
             @Override
             public void display(Object message) {
@@ -54,11 +71,11 @@ public class UpdateSubscriberController implements Initializable {
 
                         if (success) {
                             Subscriber updated = new Subscriber(
-                                    usernameField.getText(),
-                                    showingPassword ? visiblePasswordField.getText() : passwordField.getText(),
-                                    phoneField.getText(),
-                                    emailField.getText(),
-                                    SubscriberSession.getSubscriber().getCode()
+                                usernameField.getText(),
+                                showingPassword ? visiblePasswordField.getText() : passwordField.getText(),
+                                phoneField.getText(),
+                                emailField.getText(),
+                                SubscriberSession.getSubscriber().getCode()
                             );
                             SubscriberSession.setSubscriber(updated);
                         }
@@ -68,6 +85,9 @@ public class UpdateSubscriberController implements Initializable {
         };
     }
 
+    /**
+     * Toggles the visibility of the password field between hidden and visible.
+     */
     @FXML
     public void togglePasswordVisibility() {
         showingPassword = !showingPassword;
@@ -87,6 +107,9 @@ public class UpdateSubscriberController implements Initializable {
         }
     }
 
+    /**
+     * Sends updated subscriber data to the server.
+     */
     @FXML
     private void handleSave() {
         String username = usernameField.getText();
@@ -98,16 +121,22 @@ public class UpdateSubscriberController implements Initializable {
         Main.clientConsole.accept(new ResponseWrapper("UpdateSubscriber", updated));
     }
 
+    /**
+     * Logs the subscriber out and returns to the main login page.
+     */
     @FXML
     private void handleLogout() {
         try {
-        	SubscriberSession.setSubscriber(null);
+            SubscriberSession.setSubscriber(null);
             Main.switchScene("MainPage.fxml");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * Navigates back to the subscriber's main page.
+     */
     @FXML
     private void handleSubscriberOrders() {
         try {
@@ -116,8 +145,10 @@ public class UpdateSubscriberController implements Initializable {
             e.printStackTrace();
         }
     }
-    
 
+    /**
+     * Refreshes the current update subscriber scene.
+     */
     @FXML
     private void handleUpdateSubscriber() {
         try {
@@ -126,55 +157,60 @@ public class UpdateSubscriberController implements Initializable {
             e.printStackTrace();
         }
     }
-    
-	@FXML
-	public void carDeliveryBtnClicked() {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("CarDelivery2.fxml"));
-			Parent root = loader.load();
 
-			Scene scene = new Scene(root); // ← קודם יוצרים את הסצנה
+    /**
+     * Opens the car delivery page in a new window.
+     */
+    @FXML
+    public void carDeliveryBtnClicked() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CarDelivery2.fxml"));
+            Parent root = loader.load();
 
-			// ורק לאחר מכן מוסיפים CSS
-			scene.getStylesheets().add(getClass().getResource("CarDelivery.css").toExternalForm());
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("CarDelivery.css").toExternalForm());
 
-			Stage stage = new Stage();
-			stage.setTitle("Car Delivery");
-			stage.setScene(scene);
-			stage.show();
+            Stage stage = new Stage();
+            stage.setTitle("Car Delivery");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    /**
+     * Navigates to the car receiving page.
+     */
+    public void handleRegister() {
+        try {
+            Main.switchScene("ReceivingCarPage.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void handleRegister() {
-		try {
-			Main.switchScene("ReceivingCarPage.fxml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	 
-	@FXML
-	void handleExtendsParkingTime() {
-		try {
-			Main.switchScene("ExtendParkingTime.fxml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	@FXML
-	void handleOrderParkingSpot()
-	{
-		try {
-			Main.switchScene("MakingOrder.fxml");
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
+    /**
+     * Navigates to the page for extending parking time.
+     */
+    @FXML
+    void handleExtendsParkingTime() {
+        try {
+            Main.switchScene("ExtendParkingTime.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Navigates to the page for placing a new parking spot order.
+     */
+    @FXML
+    void handleOrderParkingSpot() {
+        try {
+            Main.switchScene("MakingOrder.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
-
-

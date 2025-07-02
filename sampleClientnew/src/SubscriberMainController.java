@@ -18,15 +18,46 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the subscriber's main dashboard.
+ * Displays recent order history and allows navigation to features like:
+ * <ul>
+ *     <li>Profile update</li>
+ *     <li>Car delivery</li>
+ *     <li>Code retrieval</li>
+ *     <li>Extending parking time</li>
+ *     <li>Order status</li>
+ * </ul>
+ */
 public class SubscriberMainController implements Initializable {
 
-    @FXML private TableView<Order> historyTable;
-    @FXML private TableColumn<Order, Integer> orderNumberCol;
-    @FXML private TableColumn<Order, String> orderDateCol;
-    @FXML private TableColumn<Order, String> datePlacedCol;
-    @FXML private TableColumn<Order, String> parkingSpaceCol;
-    @FXML private TableColumn<Order, String> carNumberCol;
+    /** Table to display recent parking orders of the subscriber */
+    @FXML
+    private TableView<Order> historyTable;
 
+    /** Column for order number */
+    @FXML
+    private TableColumn<Order, Integer> orderNumberCol;
+
+    /** Column for order date */
+    @FXML
+    private TableColumn<Order, String> orderDateCol;
+
+    /** Column for date the order was placed */
+    @FXML
+    private TableColumn<Order, String> datePlacedCol;
+
+    /** Column for parking space associated with the order */
+    @FXML
+    private TableColumn<Order, String> parkingSpaceCol;
+
+    /** Column for the car number */
+    @FXML
+    private TableColumn<Order, String> carNumberCol;
+
+    /**
+     * Initializes the table view and fetches the subscriber’s order history from the server.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         orderNumberCol.setCellValueFactory(new PropertyValueFactory<>("order_number"));
@@ -62,6 +93,9 @@ public class SubscriberMainController implements Initializable {
         }
     }
 
+    /**
+     * Logs the subscriber out and navigates to the main welcome page.
+     */
     @FXML
     private void handleLogout() {
         try {
@@ -72,6 +106,9 @@ public class SubscriberMainController implements Initializable {
         }
     }
 
+    /**
+     * Refreshes the order history for the current subscriber.
+     */
     @FXML
     public void handleSubscriberOrders() {
         if (SubscriberSession.getSubscriber() != null) {
@@ -81,6 +118,9 @@ public class SubscriberMainController implements Initializable {
         }
     }
 
+    /**
+     * Navigates to the subscriber profile update page.
+     */
     @FXML
     private void handleUpdateSubscriber() {
         try {
@@ -90,6 +130,9 @@ public class SubscriberMainController implements Initializable {
         }
     }
 
+    /**
+     * Opens a separate window for car delivery processing.
+     */
     @FXML
     public void carDeliveryBtnClicked() {
         try {
@@ -108,6 +151,9 @@ public class SubscriberMainController implements Initializable {
         }
     }
 
+    /**
+     * Navigates to the page where the subscriber registers car pickup.
+     */
     @FXML
     public void handleRegister() {
         try {
@@ -117,6 +163,9 @@ public class SubscriberMainController implements Initializable {
         }
     }
 
+    /**
+     * Navigates to the view for extending the subscriber's parking time.
+     */
     @FXML
     public void handleExtendsParkingTime() {
         try {
@@ -125,7 +174,10 @@ public class SubscriberMainController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * Navigates to the order status view for the subscriber.
+     */
     @FXML
     public void handleOrdersstatus() {
         try {
@@ -134,5 +186,4 @@ public class SubscriberMainController implements Initializable {
             e.printStackTrace();
         }
     }
-    
 }
