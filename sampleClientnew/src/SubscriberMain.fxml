@@ -25,10 +25,10 @@
             <children>
                 <Button onAction="#handleUpdateSubscriber" styleClass="side-menu-button" text="Update details" />
                 <Button onAction="#handleSubscriberOrders" styleClass="side-menu-button-selected" text="Orders" />
-                <Button styleClass="side-menu-button" onAction="#carDeliveryBtnClicked"  text="Car Delivery" />
-                <Button styleClass="side-menu-button" text="Car Receiving " onAction="#handleRegister" />
-                <Button styleClass="side-menu-button" text="Extend Parking Time" onAction="#handleExtendsParkingTime" />
-                <Button styleClass="side-menu-button" text="Order parking spot" onAction="#handleOrderParkingSpot" />
+                <Button onAction="#handleOrdersstatus" styleClass="side-menu-button" text="Orders Status" />
+                <Button onAction="#carDeliveryBtnClicked" styleClass="side-menu-button" text="Car Delivery" />
+                <Button onAction="#handleRegister" styleClass="side-menu-button" text="Car Receiving " />
+                <Button onAction="#handleExtendsParkingTime" styleClass="side-menu-button" text="Extend Parking Time" />
             </children>
             <padding><Insets top="40" /></padding>
         </VBox>
@@ -43,8 +43,6 @@
                     <TableColumn fx:id="datePlacedCol" prefWidth="100.66668701171875" text="Date Of Placing Order" />
                     <TableColumn fx:id="parkingSpaceCol" prefWidth="98.66671752929688" text="Parking Space" />
                     <TableColumn fx:id="carNumberCol" prefWidth="86.6666259765625" text="Car Number" />
-                    <TableColumn fx:id="startTimeCol" prefWidth="183.33331298828125" text="Start Time" />
-                    <TableColumn fx:id="endTimeCol" prefWidth="212.6666259765625" text="End Time" />
                 </columns>
             </TableView>
         </VBox>
