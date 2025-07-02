@@ -93,10 +93,29 @@ public class workerController implements Initializable{
 	@FXML
 	private void showOrdersBtn() {
 	    try {
-	        Main.switchScene("ShowOrder.fxml"); // שנה ל-FXML שמתאים
+	        Main.switchScene("ShowOrder.fxml"); 
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
+	}
+	
+	@FXML
+	public void RegisterNewSubscriber()
+	{
+		  try {
+		        Main.switchScene("Register.fxml"); 
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}	
+	@FXML
+	public void handleLogout()
+	{
+		 try {
+		        Main.switchScene("MainPage.fxml"); 
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
 	}
 
 

@@ -15,7 +15,8 @@
     <top>
         <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
             <children>
-                <Button fx:id="backButton" onAction="#handleBack" styleClass="back-button" text="← Back" />
+             <Button fx:id="LogoutButton" onAction="#handleLogout" styleClass="logout-button" text="Logout" />
+     
                 <Label styleClass="main-title" text="Subscriber Details" />
             </children>
         </HBox>
@@ -28,6 +29,7 @@
                 <Button styleClass="side-menu-button" text="Subscriber details" />
                 <Button onAction="#parkingActiveDetailsBtn" styleClass="side-menu-button" text="Parking active details" />
             <Button onAction="#showOrdersBtn" styleClass="side-menu-button" text="Orders" />
+            <Button onAction="#RegisterNewSubscriber" styleClass="side-menu-button" text="Register New Subscriber" />
             </children>
             <padding>
                 <Insets top="40" />

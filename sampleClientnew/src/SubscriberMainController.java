@@ -143,13 +143,13 @@ public class SubscriberMainController implements Initializable {
 		datePlacedCol.setCellValueFactory(new PropertyValueFactory<>("date_of_placing_an_order"));
 		parkingSpaceCol.setCellValueFactory(new PropertyValueFactory<>("parking_space"));
 		carNumberCol.setCellValueFactory(new PropertyValueFactory<>("carNumber"));
-		startTimeCol.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-		endTimeCol.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+		//startTimeCol.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+		//endTimeCol.setCellValueFactory(new PropertyValueFactory<>("endTime"));
 
 		// פורמט להצגת תאריך ושעה בלי T
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-		startTimeCol.setCellFactory(column -> new TableCell<Order, LocalDateTime>() {
+		/*startTimeCol.setCellFactory(column -> new TableCell<Order, LocalDateTime>() {
 			@Override
 			protected void updateItem(LocalDateTime item, boolean empty) {
 				super.updateItem(item, empty);
@@ -163,7 +163,7 @@ public class SubscriberMainController implements Initializable {
 				super.updateItem(item, empty);
 				setText((empty || item == null) ? null : item.format(formatter));
 			}
-		});
+		});*/
 
 		historyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		historyTable.setEditable(false);
@@ -234,7 +234,7 @@ public class SubscriberMainController implements Initializable {
 			stage.setTitle("Car Delivery");
 			stage.setScene(scene);
 			stage.show();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -247,6 +247,7 @@ public class SubscriberMainController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+
 	@FXML
 	void handleExtendsParkingTime() {
 		try {
@@ -255,12 +256,23 @@ public class SubscriberMainController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+
 	@FXML
 	void handleOrderParkingSpot() {
 		try {
 			Main.switchScene("MakingOrder.fxml");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	@FXML
+	public void handleOrdersstatus() {
+		try {
+			Main.switchScene("OrderStatus.fxml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

@@ -39,7 +39,15 @@ public class managerController extends workerController {
         }
     }
     
-    
+    @FXML
+	public void handleLogout()
+	{
+		 try {
+		        Main.switchScene("MainPage.fxml"); 
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+	}
     @FXML
 	private void handleBack(ActionEvent event) {
 	    try {
