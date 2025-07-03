@@ -80,6 +80,7 @@
     -fx-font-weight: bold;
 }
 
+
 /* Success message (green with transparency) */
 .success-box {
     -fx-background-color: rgba(0, 128, 0, 0.2); /* green transparent */
@@ -89,5 +90,15 @@
     -fx-padding: 10;
     -fx-text-fill: darkgreen;
     -fx-font-weight: bold;
+}
+/*style for the link */
+.qr-login-link {
+    -fx-text-fill: #0066cc;
+    -fx-underline: true;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+}
+.qr-login-link:hover {
+    -fx-text-fill: #004c99;
 }
 

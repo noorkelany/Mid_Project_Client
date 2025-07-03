@@ -14,7 +14,7 @@
             <children>
                 <Button text="← Back" onAction="#handleBack" styleClass="back-button"/>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Label text="Subscriber Login" styleClass="main-title"/>
+                <Label text="Login" styleClass="main-title"/>
                 <Region HBox.hgrow="ALWAYS"/>
             </children>
         </HBox>
@@ -32,7 +32,9 @@
                            GridPane.rowIndex="1" GridPane.columnIndex="0"
                            GridPane.columnSpan="2" styleClass="text-field"/>
 
-                <Label text="Password" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <Label text="Password/Unique code" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <!-- // <Label text="Password" GridPane.rowIndex="2" GridPane.columnIndex="0"/> -->
+
                 <StackPane GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2">
                     <PasswordField fx:id="passwordField" promptText="Enter password"/>
                     <TextField fx:id="visiblePasswordField" visible="false" managed="false"/>
@@ -58,6 +60,9 @@
                     <Label fx:id="messageLabel" wrapText="true" style="-fx-text-fill: white;" />
                 </VBox>
             </GridPane>
+
+            <Label text="Login via QR Code"
+                   onMouseClicked="#handleQRLoginLink" styleClass="qr-login-link"/>
         </VBox>
     </center>
 </BorderPane>

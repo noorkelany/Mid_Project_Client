@@ -162,6 +162,9 @@ public class ParkingSpotReportController {
 		yAxis.setLowerBound(0);
 	}
 
+	/**
+	 * method to go back to the manager page
+	 */
 	public void handleBack() {
 		try {
 
@@ -172,6 +175,9 @@ public class ParkingSpotReportController {
 		}
 	}
 
+	/**
+	 * method to export the report as pdf file 
+	 */
 	@FXML
 	public void handleExportPDF() {
 		FileChooser fileChooser = new FileChooser();

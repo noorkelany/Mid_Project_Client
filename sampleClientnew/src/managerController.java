@@ -9,27 +9,42 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the Manager's interface, extending common functionalities from {@code workerController}.
+ * Provides navigation to manager-specific views such as reports and parking activity.
+ */
 public class managerController extends workerController {
-	
+
+    /**
+     * Navigates to the Parking Spot Report page.
+     * @param event the action event triggered by clicking the report button
+     */
     @FXML
     void reportsBtn(ActionEvent event) {
-		try {
-			Main.switchScene("parkingSpotReport.fxml");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            Main.switchScene("parkingSpotReport.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Navigates to the Monthly Report View page.
+     * @param event the action event triggered by clicking the monthly report button
+     */
     @FXML
     void MonthlyreportsBtn(ActionEvent event) {
-		try {
-			Main.switchScene("MonthlyReportView.fxml");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            Main.switchScene("MonthlyReportView.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    /**
+     * Navigates to the active parking details view for managers.
+     * @param event the action event triggered by clicking the active details button
+     */
     @FXML
     void parkingActiveDetailsBtn(ActionEvent event) {
         try {
@@ -38,22 +53,19 @@ public class managerController extends workerController {
             e.printStackTrace();
         }
     }
-    
-    
+
+    /**
+     * Returns to the main page (MainPage.fxml).
+     * @param event the action event triggered by clicking the back button
+     */
     @FXML
-	private void handleBack(ActionEvent event) {
-	    try {
-	    	 // Load the previous FXML
-	        Parent previousRoot = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
-
-	        // Get current stage from any control (e.g. the button)
-	        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-	        // Replace the scene in the same window
-	        stage.setScene(new Scene(previousRoot));
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	}
-    
+    private void handleBack(ActionEvent event) {
+        try {
+            Parent previousRoot = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(previousRoot));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

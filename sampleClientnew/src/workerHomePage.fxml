@@ -10,55 +10,63 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="600" prefWidth="850"
-	stylesheets="@updateorder.css" xmlns="http://javafx.com/javafx/23.0.1"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="workerController">
+    stylesheets="@updateorder.css" xmlns="http://javafx.com/javafx/23.0.1"
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="workerController">
 
-	<!-- Top Blue Bar -->
-	<top>
-		<HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
-			<children>
-				<Button fx:id="backButton" onAction="#handleBack"
-					styleClass="back-button" text="← Back" />
-				<Label styleClass="main-title" text="Subscriber Details" />
-			</children>
-		</HBox>
-	</top>
+    <!-- Top Blue Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
+            <children>
+                <Button fx:id="LogoutButton" onAction="#handleLogout" styleClass="logout-button" text="Logout" />
+                <Label styleClass="main-title" text="Subscriber Details" />
+            </children>
+        </HBox>
+    </top>
 
-	<!-- Side Menu -->
-	<left>
-		<VBox alignment="TOP_CENTER" prefWidth="180" spacing="20"
-			styleClass="side-panel">
-			<children>
-				<Button styleClass="side-menu-button"
-					text="Subscriber details" />
-				<Button onAction="#parkingActiveDetailsBtn"
-					styleClass="side-menu-button" text="Parking active details" />
-				<Button onAction="#showOrdersBtn"
-					styleClass="side-menu-button" text="Orders" />
-				<Button text="Register New Subscriber"
-					onAction="#handleRegisterNewSubscriber" styleClass="side-menu-button" />
+    <!-- Side Menu - using master version -->
+    <left>
+        <VBox alignment="TOP_CENTER" prefWidth="180" spacing="20" styleClass="side-panel">
+            <children>
+                <Button styleClass="side-menu-button" text="Subscriber details" />
+                <Button onAction="#parkingActiveDetailsBtn" styleClass="side-menu-button" text="Parking active details" />
+                <Button onAction="#showOrdersBtn" styleClass="side-menu-button" text="Orders" />
+                <Button onAction="#handleRegisterNewSubscriber"   styleClass="side-menu-button" text="Register New Subscriber" />
+            </children>
+            <padding>
+                <Insets top="40" />
+            </padding>
+        </VBox>
+    </left>
 
-			</children>
-			<padding>
-				<Insets top="40" />
-			</padding>
-		</VBox>
-	</left>
+    <!-- / Your original version (HEAD) was:
+    <left>
+        <VBox alignment="TOP_CENTER" prefWidth="180" spacing="20" styleClass="side-panel">
+            <children>
+                <Button styleClass="side-menu-button" text="Subscriber details" />
+                <Button onAction="#parkingActiveDetailsBtn" styleClass="side-menu-button" text="Parking active details" />
+                <Button onAction="#showOrdersBtn" styleClass="side-menu-button" text="Orders" />
+                <Button text="Register New Subscriber" onAction="#handleRegisterNewSubscriber" styleClass="side-menu-button" />
+            </children>
+            <padding>
+                <Insets top="40" />
+            </padding>
+        </VBox>
+    </left>
+    -->
 
-	<!-- Main Content Area -->
-	<center>
-		<VBox alignment="TOP_CENTER" spacing="20"
-			style="-fx-padding: 30;">
-			<TableView fx:id="subscriberTable" prefHeight="400"
-				prefWidth="600">
-				<columns>
-					<TableColumn fx:id="codeCol" text="Code" />
-					<TableColumn fx:id="usernameCol" text="Username" />
-					<TableColumn fx:id="passwordCol" text="Password" />
-					<TableColumn fx:id="phoneNumberCol" text="Phone number" />
-					<TableColumn fx:id="emailCol" text="Email" />
-				</columns>
-			</TableView>
-		</VBox>
-	</center>
+    <!-- Main Content Area -->
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 30;">
+            <TableView fx:id="subscriberTable" prefHeight="400" prefWidth="600">
+                <columns>
+                    <TableColumn fx:id="codeCol" text="Code" />
+                    <TableColumn fx:id="usernameCol" text="Username" />
+                    <TableColumn fx:id="passwordCol" text="Password" />
+                    <TableColumn fx:id="phoneNumberCol" text="Phone number" />
+                    <TableColumn fx:id="emailCol" text="Email" />
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
 </BorderPane>

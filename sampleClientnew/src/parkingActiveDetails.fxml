@@ -30,6 +30,9 @@
                         styleClass="side-menu-button"/>
                 <Button text="Parking active details"
                         styleClass="side-menu-button-selected"/>
+               <Button onAction="#showOrdersBtn" styleClass="side-menu-button" text="Orders" />
+            <Button onAction="#RegisterNewSubscriber" styleClass="side-menu-button" text="Register New Subscriber" />
+            
             </children>
             <padding>
                 <Insets top="40"/>

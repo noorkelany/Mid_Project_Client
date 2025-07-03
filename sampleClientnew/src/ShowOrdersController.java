@@ -8,9 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-/**
- * Controller for showorders.fxml — Displays all subscriber orders in a styled table.
- */
+// controller to show all orders in a table
 public class ShowOrdersController {
 
     @FXML private TableView<Order> ordersTable;
@@ -23,10 +21,12 @@ public class ShowOrdersController {
 
     private Main mainApp;
 
+    // set reference to main app
     public void setMainApp(Main mainApp) {
         this.mainApp = mainApp;
     }
 
+    // init table and get data from server
     @FXML
     public void initialize() {
         orderNumberCol.setCellValueFactory(new PropertyValueFactory<>("order_number"));
@@ -40,7 +40,7 @@ public class ShowOrdersController {
         ordersTable.setEditable(false);
         ordersTable.setFocusTraversable(false);
 
-        // Load data using temporary ClientConsole
+        // set listener to receive orders from server
         Main.clientConsole = new ClientConsole(Main.serverIP, 5555) {
             @Override
             public void display(Object message) {
@@ -61,23 +61,19 @@ public class ShowOrdersController {
         Main.clientConsole.accept("showAllOrders");
     }
 
-    /**
-     * Navigates back to the main subscriber screen.
-     */
+    // go back to worker main screen
     public void goBack() {
         try {
-            mainApp.switchScene("workerHomePage.fxml");
+            Main.switchScene("workerHomePage.fxml");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Navigates to the update order screen.
-     */
+    // go to update order page
     public void updateOrder() {
         try {
-            mainApp.switchScene("UpdateOrder.fxml");
+            Main.switchScene("UpdateOrder.fxml");
         } catch (Exception e) {
             e.printStackTrace();
         }

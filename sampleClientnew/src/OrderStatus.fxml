@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600" prefWidth="1051.0" stylesheets="@SubscriberMain.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SubscriberMainController">
+<BorderPane prefHeight="600" prefWidth="945.0" stylesheets="@OrderStatus.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OrderStatusController">
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
@@ -24,8 +24,8 @@
         <VBox alignment="TOP_CENTER" prefWidth="150.0" spacing="20" styleClass="side-panel">
             <children>
                 <Button onAction="#handleUpdateSubscriber" styleClass="side-menu-button" text="Update details" />
-                <Button onAction="#handleSubscriberOrders" styleClass="side-menu-button-selected" text="Orders" />
-                <Button onAction="#handleOrdersstatus" styleClass="side-menu-button" text="Orders Status" />
+                <Button onAction="#handleSubscriberOrders" styleClass="side-menu-button" text="Orders" />
+                <Button onAction="#handleSubscriberOrders" prefHeight="59.0" prefWidth="125.0" styleClass="side-menu-button-selected" text="Orders Status" textAlignment="CENTER" />
                 <Button onAction="#carDeliveryBtnClicked" styleClass="side-menu-button" text="Car Delivery" />
                 <Button onAction="#handleRegister" styleClass="side-menu-button" text="Car Receiving " />
                 <Button onAction="#handleExtendsParkingTime" styleClass="side-menu-button" text="Extend Parking Time" />
@@ -35,14 +35,15 @@
     </left>
 
     <center>
-        <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 30;">
-            <TableView fx:id="historyTable" prefHeight="400" prefWidth="871.0">
+        <VBox alignment="TOP_CENTER" prefHeight="541.0" prefWidth="723.0" spacing="20" style="-fx-padding: 30;">
+            <TableView fx:id="historyTable" prefHeight="400" prefWidth="622.0">
                 <columns>
-                    <TableColumn fx:id="orderNumberCol" prefWidth="87.33332824707031" text="Order Number" />
-                    <TableColumn fx:id="orderDateCol" prefWidth="72.66668701171875" text="Order Date" />
-                    <TableColumn fx:id="datePlacedCol" prefWidth="100.66668701171875" text="Date Of Placing Order" />
-                    <TableColumn fx:id="parkingSpaceCol" prefWidth="98.66671752929688" text="Parking Space" />
-                    <TableColumn fx:id="carNumberCol" prefWidth="86.6666259765625" text="Car Number" />
+                    <TableColumn fx:id="parkingspaceCol" prefWidth="96.66661071777344" text="parking Space" />
+                    <TableColumn fx:id="orderDateCol" prefWidth="102.66668701171875" text="Order Date" />
+                    <TableColumn fx:id="ordertimeCol" prefWidth="105.3333740234375" text="Order Time" />
+                    <TableColumn fx:id="orderstatusCol" prefWidth="87.99996948242188" text="Status" />
+                    <TableColumn fx:id="numberofextendsCol" prefWidth="155.99993896484375" text="number Of Extends" />
+               <TableColumn fx:id="recivingcartimeCol1" prefWidth="184.666748046875" text="receiving Car Time" />
                 </columns>
             </TableView>
         </VBox>

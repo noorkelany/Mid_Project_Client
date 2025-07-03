@@ -61,6 +61,9 @@ public class ClientConsole implements ChatIF {
 	 * This method waits for input from the console. Once it is received, it sends
 	 * it to the client's message handler.
 	 */
+	/**
+	 * @param messageToServer what message to send to the server
+	 */
 	public void accept(Object messageToServer) {
 		try {
 			/*

@@ -14,21 +14,40 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
 
+/**
+ * Controller for handling the extension of parking time. Allows the user to
+ * select additional hours and sends the request to the server. Updates the UI
+ * based on the server's response.
+ */
 public class extendsParkingTimeController {
 
+	/**
+	 * spinner for picking an hour
+	 */
 	@FXML
 	private Spinner<Integer> hourSpinner;
 
+	/**
+	 * label for displaying messages for the user
+	 */
 	@FXML
 	private Label statusLabel;
 
+	/**
+	 * label for displaying messages for the user
+	 */
 	private static Label statusLabelStatic;
 
+	/**
+	 * Initializes the controller, sets up the hour spinner, and configures the
+	 * client-side response handler for server messages.
+	 */
 	@FXML
 	public void initialize() {
 		SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, 1);
 		hourSpinner.setValueFactory(valueFactory);
 		statusLabelStatic = statusLabel;
+
 		Main.clientConsole = new ClientConsole(Main.serverIP, 5555) {
 			@Override
 			public void display(Object msg) {
@@ -46,9 +65,12 @@ public class extendsParkingTimeController {
 				});
 			}
 		};
-
 	}
 
+	/**
+	 * Sends the selected hour value to the server to request a parking time
+	 * extension.
+	 */
 	public void sendSelectedHour() {
 		int selectedHour = hourSpinner.getValue();
 		ResponseWrapper rsp = new ResponseWrapper("EXTEND_PARKING_TIME", SubscriberSession.getSubscriber().getCode(),
@@ -57,6 +79,12 @@ public class extendsParkingTimeController {
 		Main.clientConsole.accept(rsp);
 	}
 
+	/**
+	 * Updates the status label with a message from the server and navigates back to
+	 * the main page after a short delay.
+	 *
+	 * @param message The message to display (e.g. approved or rejected)
+	 */
 	public static void setStatus(String message) {
 		if (statusLabelStatic != null) {
 			statusLabelStatic.setText(message);
@@ -66,13 +94,12 @@ public class extendsParkingTimeController {
 				statusLabelStatic.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
 			}
 
-			// Create a new background thread for the delay
+			// Delay for 3 seconds, then switch scene
 			new Thread(() -> {
 				try {
-					Thread.sleep(3000); // wait 3 seconds
+					Thread.sleep(3000);
 					Platform.runLater(() -> {
 						try {
-							// Main.switchScene("subscriberHomePage.fxml");
 							Main.switchScene("MainPage.fxml");
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -84,29 +111,20 @@ public class extendsParkingTimeController {
 			}).start();
 		}
 	}
-	
+
+	/**
+	 * Handles navigation back to the subscriber's main page.
+	 *
+	 * @param event the button click event triggering the navigation
+	 */
 	@FXML
-    public void handleBackToMainPage(ActionEvent event) {
+	public void handleBackToMainPage(ActionEvent event) {
 		try {
-			// Load the previous FXML
 			Parent previousRoot = FXMLLoader.load(getClass().getResource("SubscriberMain.fxml"));
-			// Get current stage from any control (e.g. the button)
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			// Replace the scene in the same window
 			stage.setScene(new Scene(previousRoot));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-       /* try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("BPARK Dashboard");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-    }
-
+	}
 }

@@ -40,7 +40,7 @@
                         <Button onAction="#checkCodeClicked" styleClass="button" text="Check Code" />
                     </children>
                 </HBox>
-            <Label onMouseClicked="#confCode" style="-fx-text-fill: #0090ff;" styleClass="conCodelabel" stylesheets="@CarDelivery.css" text="I have alerady conformation code" textFill="#0090ff">
+            <Label onMouseClicked="#confCode" style="-fx-text-fill: #0090ff;" styleClass="conCodelabel" stylesheets="@CarDelivery.css" text="I already have confirmation code" textFill="#0090ff">
                <VBox.margin>
                   <Insets left="3.0" />
                </VBox.margin>

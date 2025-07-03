@@ -41,7 +41,16 @@
 				<Button fx:id="btnSMS" text="By SMS" onAction="#SendBySMS"
 					styleClass="side-menu-button" />
 			</HBox>
-	<Label fx:id="statusLabel" />
+			<Label fx:id="statusLabel" />
+			<Label fx:id="forgotCodeTitle" text=""
+				style="-fx-text-fill: black; -fx-font-size: 14px;" />
+			<!-- Styled Message Box -->
+			<VBox fx:id="messageBox" visible="false" managed="false"
+				spacing="5" alignment="CENTER"
+				style="-fx-background-color: #ffffff; -fx-border-color: #c0c0c0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5,0,0,2);">
+				<Label fx:id="messageLabel" wrapText="true"
+					style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+			</VBox>
 		</VBox>
 	</center>
 </BorderPane>

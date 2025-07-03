@@ -47,11 +47,11 @@
 						text="Report 2" onAction="#handleGeneratingReport2" /> <Line endX="200" stroke="gray" 
 						strokeWidth="1" /> -->
 
-					<Label text="Staff" styleClass="group-title" />
+				<!--  	<Label text="Staff" styleClass="group-title" />
 					<Button styleClass="nav-button" text="Worker"
 						onAction="#workerBtn" fx:id="workerBtn" />
 					<Button styleClass="nav-button" text="Manager"
-						onAction="#handleManagerBtn" />
+						onAction="#handleManagerBtn" /> -->
 				</children>
 			</VBox>
 

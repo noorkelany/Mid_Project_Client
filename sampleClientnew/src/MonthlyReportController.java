@@ -1,4 +1,3 @@
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,268 +29,255 @@ import javafx.stage.FileChooser;
  */
 public class MonthlyReportController {
 
-	/** Bar chart displaying total parking duration per car number */
-	@FXML
-	private BarChart<String, Number> durationChart;
+    /** Bar chart displaying total parking duration per car number */
+    @FXML
+    private BarChart<String, Number> durationChart;
 
-	/** Table displaying the full parking report */
-	@FXML
-	private TableView<MonthlyParkingEntry> reportTable;
+    /** Bar chart displaying total delay warnings per subscriber */
+    @FXML
+    private BarChart<String, Number> warningChart;
 
-	@FXML
-	private Button showTableButton;
+    /** Table displaying the full parking report */
+    @FXML
+    private TableView<MonthlyParkingEntry> reportTable;
 
-	/** Table columns mapped to MonthlyParkingEntry fields */
-	@FXML
-	private TableColumn<MonthlyParkingEntry, Integer> subscriberCodeCol;
-	@FXML
-	private TableColumn<MonthlyParkingEntry, String> carNumberCol;
-	@FXML
-	private TableColumn<MonthlyParkingEntry, String> parkingDateCol;
-	@FXML
-	private TableColumn<MonthlyParkingEntry, String> startTimeCol;
-	@FXML
-	private TableColumn<MonthlyParkingEntry, String> endTimeCol;
-	@FXML
-	private TableColumn<MonthlyParkingEntry, Integer> durationCol;
-	@FXML
-	private TableColumn<MonthlyParkingEntry, Integer> extendsCol;
-	@FXML
-	private TableColumn<MonthlyParkingEntry, Integer> warningsCol;
+    @FXML
+    private Button showTableButton;
 
-	/** Singleton-like static instance for UI updates */
-	private static MonthlyReportController instance;
+    @FXML
+    private VBox tableContainer;
 
-	/** Observable list for populating the TableView */
-	private ObservableList<MonthlyParkingEntry> reportData = FXCollections.observableArrayList();
+    @FXML
+    private Button toggleTableButton;
 
-	/**
-	 * Initializes the controller. Sets up table column bindings and registers a
-	 * client listener for receiving the report data from the server.
-	 */
+    /** Table columns mapped to MonthlyParkingEntry fields */
+    @FXML
+    private TableColumn<MonthlyParkingEntry, Integer> subscriberCodeCol;
+    @FXML
+    private TableColumn<MonthlyParkingEntry, String> carNumberCol;
+    @FXML
+    private TableColumn<MonthlyParkingEntry, String> parkingDateCol;
+    @FXML
+    private TableColumn<MonthlyParkingEntry, String> startTimeCol;
+    @FXML
+    private TableColumn<MonthlyParkingEntry, String> endTimeCol;
+    @FXML
+    private TableColumn<MonthlyParkingEntry, Integer> durationCol;
+    @FXML
+    private TableColumn<MonthlyParkingEntry, Integer> extendsCol;
+    @FXML
+    private TableColumn<MonthlyParkingEntry, Integer> warningsCol;
 
-	@FXML
-	private BarChart<String, Number> warningChart;
-	
-	@FXML private VBox tableContainer;
-	
-	@FXML private Button toggleTableButton;
-	private boolean isTableVisible = false;
+    /** Singleton-like static instance for UI updates */
+    private static MonthlyReportController instance;
 
+    /** Observable list for populating the TableView */
+    private ObservableList<MonthlyParkingEntry> reportData = FXCollections.observableArrayList();
 
-	@FXML
-	public void initialize() {
-		instance = this;
+    private boolean isTableVisible = false;
 
-		// Bind table columns to data fields
-		subscriberCodeCol.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getSubscriberCode()));
-		carNumberCol.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCarNumber()));
-		parkingDateCol.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getParkingDate()));
-		startTimeCol.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getStartTime()));
-		endTimeCol.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getEndTime()));
-		durationCol.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getDurationMinutes()));
-		extendsCol.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getNumberOfExtends()));
-		warningsCol.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getDelayWarnings()));
+    /**
+     * Initializes the controller. Sets up table column bindings and registers a
+     * client listener for receiving the report data from the server.
+     */
+    @FXML
+    public void initialize() {
+        instance = this;
 
-		// Override the client console display method to handle incoming report data
-		Main.clientConsole = new ClientConsole(Main.serverIP, 5555) {
-			@Override
-			public void display(Object msg) {
-				System.out.println("Received object: " + msg);
+        // Bind table columns to data fields
+        subscriberCodeCol.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getSubscriberCode()));
+        carNumberCol.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCarNumber()));
+        parkingDateCol.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getParkingDate()));
+        startTimeCol.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getStartTime()));
+        endTimeCol.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getEndTime()));
+        durationCol.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getDurationMinutes()));
+        extendsCol.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getNumberOfExtends()));
+        warningsCol.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getDelayWarnings()));
 
-				if (msg instanceof ArrayList<?>) {
-					ArrayList<?> list = (ArrayList<?>) msg;
-					if (!list.isEmpty() && list.get(0) instanceof MonthlyParkingEntry) {
-						ArrayList<MonthlyParkingEntry> entries = (ArrayList<MonthlyParkingEntry>) list;
+        // Override the client console display method to handle incoming report data
+        Main.clientConsole = new ClientConsole(Main.serverIP, 5555) {
+            @Override
+            public void display(Object msg) {
+                System.out.println("Received object: " + msg);
 
-						Platform.runLater(() -> {
-							instance.setReportData(entries);
-						});
-					}
-				}
-			}
-		};
+                if (msg instanceof ArrayList<?>) {
+                    ArrayList<?> list = (ArrayList<?>) msg;
+                    if (!list.isEmpty() && list.get(0) instanceof MonthlyParkingEntry) {
+                        ArrayList<MonthlyParkingEntry> entries = (ArrayList<MonthlyParkingEntry>) list;
+                        Platform.runLater(() -> {
+                            instance.setReportData(entries);
+                        });
+                    }
+                }
+            }
+        };
 
-		// Start by requesting data from the server
-		loadDataFromServer();
-	}
+        // Start by requesting data from the server
+        loadDataFromServer();
+    }
 
-	/**
-	 * Sends a message to the server requesting the current month's parking report.
-	 */
-	private void loadDataFromServer() {
-		Main.clientConsole.accept("GET_MONTHLY_REPORT");
-	}
+    /**
+     * Sends a message to the server requesting the current month's parking report.
+     */
+    private void loadDataFromServer() {
+        Main.clientConsole.accept("GET_MONTHLY_REPORT");
+    }
 
-	/**
-	 * Sets the data for the report table and updates the duration chart.
-	 *
-	 * @param report The list of report entries received from the server.
-	 */
-	public void setReportData(ArrayList<MonthlyParkingEntry> report) {
-		reportData.setAll(report);
-		reportTable.setItems(reportData);
-		updateDurationChart();
-		updateWarningChart();
-	}
+    /**
+     * Sets the data for the report table and updates both charts.
+     *
+     * @param report The list of report entries received from the server.
+     */
+    public void setReportData(ArrayList<MonthlyParkingEntry> report) {
+        reportData.setAll(report);
+        reportTable.setItems(reportData);
+        updateDurationChart();
+        updateWarningChart();
+    }
 
-	/**
-	 * Updates the bar chart by calculating total duration (in blocks of 30 minutes)
-	 * per car number from the current report data.
-	 */
-	/**
-	 * Updates the bar chart showing total parking duration per car in hours. Bars
-	 * are colored orange if the car has any session with extensions, green
-	 * otherwise. Tooltips show total hours and number of extensions per car.
-	 */
-	private void updateDurationChart() {
-		durationChart.getData().clear();
+    /**
+     * Updates the bar chart showing total parking duration per car in hours.
+     * Bars are colored orange if the car has any session with extensions,
+     * green otherwise. Tooltips show total hours and number of extensions per car.
+     */
+    private void updateDurationChart() {
+        durationChart.getData().clear();
 
-		XYChart.Series<String, Number> series = new XYChart.Series<>();
-		Map<String, Double> durationMap = new HashMap<>();
-		Map<String, Boolean> hasExtensions = new HashMap<>();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        Map<String, Double> durationMap = new HashMap<>();
+        Map<String, Boolean> hasExtensions = new HashMap<>();
 
-		for (MonthlyParkingEntry entry : reportData) {
-			String car = entry.getCarNumber();
-			double durationHours = entry.getDurationMinutes() / 60.0;
+        for (MonthlyParkingEntry entry : reportData) {
+            String car = entry.getCarNumber();
+            double durationHours = entry.getDurationMinutes() / 60.0;
 
-			durationMap.put(car, durationMap.getOrDefault(car, 0.0) + durationHours);
+            durationMap.put(car, durationMap.getOrDefault(car, 0.0) + durationHours);
+            if (entry.getNumberOfExtends() > 0) {
+                hasExtensions.put(car, true);
+            } else {
+                hasExtensions.putIfAbsent(car, false);
+            }
+        }
 
-			// Track if this car had any session with extensions
-			if (entry.getNumberOfExtends() > 0) {
-				hasExtensions.put(car, true);
-			} else {
-				hasExtensions.putIfAbsent(car, false);
-			}
-		}
+        for (Map.Entry<String, Double> entry : durationMap.entrySet()) {
+            String car = entry.getKey();
+            double duration = entry.getValue();
 
-		for (Map.Entry<String, Double> entry : durationMap.entrySet()) {
-			String car = entry.getKey();
-			double duration = entry.getValue();
+            XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(car, duration);
+            series.getData().add(dataPoint);
 
-			XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(car, duration);
-			series.getData().add(dataPoint);
+            Platform.runLater(() -> {
+                String color = hasExtensions.getOrDefault(car, false) ? "#FF9800" : "#4CAF50";
+                dataPoint.getNode().setStyle("-fx-bar-fill: " + color + ";");
 
-			Platform.runLater(() -> {
-				// Color bar based on extension status
-				String color = hasExtensions.getOrDefault(car, false) ? "#FF9800" : "#4CAF50";
-				dataPoint.getNode().setStyle("-fx-bar-fill: " + color + ";");
+                int totalExtends = reportData.stream()
+                        .filter(e -> e.getCarNumber().equals(car))
+                        .mapToInt(MonthlyParkingEntry::getNumberOfExtends)
+                        .sum();
 
-				// Count total extensions for this car
-				int totalExtends = reportData.stream().filter(e -> e.getCarNumber().equals(car))
-						.mapToInt(MonthlyParkingEntry::getNumberOfExtends).sum();
+                Tooltip tooltip = new Tooltip("Car: " + car + "\nDuration: " + String.format("%.1f", duration)
+                        + " hours" + "\nExtensions: " + totalExtends + " times");
+                Tooltip.install(dataPoint.getNode(), tooltip);
+            });
+        }
 
-				Tooltip tooltip = new Tooltip("Car: " + car + "\nDuration: " + String.format("%.1f", duration)
-						+ " hours" + "\nExtensions: " + totalExtends + " times");
-				Tooltip.install(dataPoint.getNode(), tooltip);
-			});
-		}
+        durationChart.getData().add(series);
+    }
 
-		durationChart.getData().add(series);
-	}
+    /**
+     * Updates the warningChart to show total delay warnings per subscriber.
+     * Aggregates delay warnings by subscriber code.
+     */
+    private void updateWarningChart() {
+        warningChart.getData().clear();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        Map<Integer, Integer> warningMap = new HashMap<>();
 
-	/**
-	 * Updates the warningChart (a BarChart) to show total delay warnings per
-	 * subscriber.
-	 * 
-	 * <p>
-	 * This method processes the {@code reportData} list, aggregates delay warnings
-	 * for each unique subscriber code, and plots the result in a bar chart. The
-	 * X-axis represents subscriber codes, and the Y-axis shows the total number of
-	 * delay warnings recorded for that subscriber during the report period.
-	 * </p>
-	 *
-	 * <p>
-	 * This visualization helps identify which subscribers frequently returned their
-	 * cars late or received system warnings.
-	 * </p>
-	 */
-	private void updateWarningChart() {
-		warningChart.getData().clear();
-		XYChart.Series<String, Number> series = new XYChart.Series<>();
-		Map<Integer, Integer> warningMap = new HashMap<>();
+        for (MonthlyParkingEntry entry : reportData) {
+            int subscriberCode = entry.getSubscriberCode();
+            int warnings = entry.getDelayWarnings();
+            warningMap.put(subscriberCode, warningMap.getOrDefault(subscriberCode, 0) + warnings);
+        }
 
-		for (MonthlyParkingEntry entry : reportData) {
-			int subscriberCode = entry.getSubscriberCode();
-			int warnings = entry.getDelayWarnings();
-			warningMap.put(subscriberCode, warningMap.getOrDefault(subscriberCode, 0) + warnings);
-		}
+        for (Map.Entry<Integer, Integer> entry : warningMap.entrySet()) {
+            int code = entry.getKey();
+            XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(String.valueOf(code), entry.getValue());
+            series.getData().add(dataPoint);
 
-		for (Map.Entry<Integer, Integer> entry : warningMap.entrySet()) {
-			int code = entry.getKey();
-			XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(String.valueOf(code), entry.getValue());
-			series.getData().add(dataPoint);
+            Platform.runLater(() -> {
+                String color = generateColorForKey(code);
+                dataPoint.getNode().setStyle("-fx-bar-fill: " + color + ";");
+            });
+        }
 
-			Platform.runLater(() -> {
-				String color = generateColorForKey(code);
-				dataPoint.getNode().setStyle("-fx-bar-fill: " + color + ";");
-			});
-		}
+        warningChart.getData().add(series);
+    }
 
-		warningChart.getData().add(series);
-	}
-	
-	private String generateColorForKey(int key) {
-        String[] colors = {"#4CAF50", "#03A9F4", "#FF9800", "#E91E63", "#9C27B0", "#00BCD4", "#FF5722", "#8BC34A"};
+    /**
+     * Generates a color from a fixed palette based on an integer key.
+     *
+     * @param key The identifier (e.g. subscriber code)
+     * @return A hex color string
+     */
+    private String generateColorForKey(int key) {
+        String[] colors = {
+            "#4CAF50", "#03A9F4", "#FF9800", "#E91E63",
+            "#9C27B0", "#00BCD4", "#FF5722", "#8BC34A"
+        };
         return colors[key % colors.length];
     }
 
-	public void handleBack() {
-		try {
+    /**
+     * Handles navigation back to the manager home page.
+     */
+    public void handleBack() {
+        try {
+            Main.switchScene("managerHomePage.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-			Main.switchScene("managerHomePage.fxml");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    /**
+     * Handles exporting the report table and charts into a PDF file.
+     * Opens a FileChooser for saving the report.
+     */
+    @FXML
+    public void handleExportPDF() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save PDF Report");
+        fileChooser.setInitialFileName("MonthlyParkingReport.pdf");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
 
-	@FXML
-	public void handleExportPDF() {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Save PDF Report");
-		fileChooser.setInitialFileName("MonthlyParkingReport.pdf");
+        File file = fileChooser.showSaveDialog(reportTable.getScene().getWindow());
 
-		// Add PDF filter
-		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+        if (file != null) {
+            if (!file.getName().toLowerCase().endsWith(".pdf")) {
+                file = new File(file.getAbsolutePath() + ".pdf");
+            }
 
-		File file = fileChooser.showSaveDialog(reportTable.getScene().getWindow());
+            PdfExporter.exportReportToPdf(file, reportTable, durationChart, warningChart);
+        }
+    }
 
-		if (file != null) {
-			// Force .pdf extension if not present
-			if (!file.getName().toLowerCase().endsWith(".pdf")) {
-				file = new File(file.getAbsolutePath() + ".pdf");
-			}
+    /**
+     * Shows the report table if hidden and disables the button to avoid multiple clicks.
+     */
+    @FXML
+    private void handleShowTable() {
+        tableContainer.setVisible(true);
+        tableContainer.setManaged(true);
+        showTableButton.setDisable(true);
+    }
 
-			PdfExporter.exportReportToPdf(file, reportTable, durationChart, warningChart);
-		}
-	}
-
-	@FXML
-	private void handleShowTable() {
-		tableContainer.setVisible(true);
-		tableContainer.setManaged(true);
-		showTableButton.setDisable(true); // למנוע לחיצה חוזרת
-	}
-
-	/*
-	 * Optional export method: Uncomment to allow saving the report to a PDF file
-	 *
-	 * @FXML public void handleExportPdf() { FileChooser fileChooser = new
-	 * FileChooser(); fileChooser.setTitle("Save PDF Report");
-	 * fileChooser.setInitialFileName("MonthlyParkingReport.pdf"); File file =
-	 * fileChooser.showSaveDialog(reportTable.getScene().getWindow());
-	 *
-	 * if (file != null) { PdfExporter.exportReportToPdf(file, reportData); } }
-	 */
-	
-	
-	@FXML
-	private void handleToggleTable() {
-	    isTableVisible = !isTableVisible;
-	    tableContainer.setVisible(isTableVisible);
-	    tableContainer.setManaged(isTableVisible);
-	    toggleTableButton.setText(isTableVisible ? "Hide Table" : "Show Table");
-	}
-
+    /**
+     * Toggles visibility of the table and updates button text accordingly.
+     */
+    @FXML
+    private void handleToggleTable() {
+        isTableVisible = !isTableVisible;
+        tableContainer.setVisible(isTableVisible);
+        tableContainer.setManaged(isTableVisible);
+        toggleTableButton.setText(isTableVisible ? "Hide Table" : "Show Table");
+    }
 }

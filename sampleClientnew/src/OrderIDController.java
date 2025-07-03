@@ -10,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Controller for getting a order ID to update it
+ */
 public class OrderIDController {
 
 	@FXML
@@ -24,16 +27,22 @@ public class OrderIDController {
 	private TextField OrderIdtxt;
 	@FXML
 	private Label statusLabel;
-	private Main mainApp;
 
-	public void setMainApp(Main mainApp) {
-		this.mainApp = mainApp;
-	}
+	
 
+	/**
+	 * method to get the typed ID
+	 * @return get typed ID
+	 */
 	private String getID() {
 		return OrderIdtxt.getText();
 	}
 
+	/**
+	 * Method to send the ID for the server in order to get order's details
+	 * @param event send button clicked
+	 * @throws Exception exception that might be thrown
+	 */
 	public void Send(ActionEvent event) throws Exception {
 		String id = getID().trim();
 
